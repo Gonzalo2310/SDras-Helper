@@ -1,0 +1,31 @@
+{
+  "finish": [
+    {
+      "title": "Finish unico",
+      "name": "unico",
+      "description": "Descripcion",
+      "short": "corto",
+      "example": "Ejemplo",
+      "output": "Salida",
+      "url": "Url"
+    },
+    {
+      "title": "Finito",
+      "name": "finalizacion",
+      "description": "Es mucho mas completo, una simple demostración de contenido.",
+      "short": "Cortita",
+      "example": "let simple= [1,2,3]\nsimple.finito();\nconsole.log(simple)",
+      "output": "[1,2,end]",
+      "url": "wwww.google.com"
+    },
+    {
+      "title": "Final",
+      "name": "FinishFinal",
+      "description": "Descripción del final",
+      "short": "Este es el final",
+      "example": "Let rt=['gggg', 'grt!!']\nrt.empty()",
+      "output": "[]",
+      "url": "www.fb.com"
+    }
+  ]
+}

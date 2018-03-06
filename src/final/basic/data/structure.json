@@ -1,0 +1,90 @@
+{
+  "structure": [
+    {
+      "id": 1,
+      "type": "step",
+      "label": "Principal",
+      "children": [
+        {
+          "id": 5,
+          "type": "step",
+          "label": "Paso",
+          "children": [
+            {
+              "id": 7,
+              "type": "finish",
+              "label": "finalizacion",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "type": "step",
+          "label": "contenedor",
+          "children": [
+            {
+              "id": 8,
+              "type": "finish",
+              "label": "FinishFinal",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "step",
+      "label": "Paso",
+      "children": [
+        {
+          "id": 9,
+          "type": "finish",
+          "label": "unico",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "step",
+      "label": "contenedor",
+      "children": [
+        {
+          "id": 10,
+          "type": "finish",
+          "label": "finalizacion",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "step",
+      "label": "Prueba",
+      "children": [
+        {
+          "id": 11,
+          "type": "step",
+          "label": "Principal",
+          "children": [
+            {
+              "id": 12,
+              "type": "step",
+              "label": "Prueba",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "finish",
+                  "label": "finalizacion",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,265 @@
+{
+  "finish": [
+    {
+      "title": "element/s to array",
+      "name": "elementoarray",
+      "description": "Adds and/or removes elements from an array.",
+      "short": "Array.splice()",
+      "example": "let arr = [5, 1, 8];\narr.splice(2, 0, 'tacos');\nconsole.log(arr);",
+      "output": "[5, 1, 'tacos', 8]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice"
+    },
+    {
+      "title": "element to the end of an array",
+      "name": "elementendarray",
+      "description": "Adds one or more elements to the end of an array and returns the new length of the array.",
+      "short": "Array.push()",
+      "example": "let arr = [5, 1, 8];\narr.push(2);\nconsole.log(arr);",
+      "output": "[5, 1, 8, 2]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push"
+    },
+    {
+      "title": "element to the front of an array",
+      "name": "elementfrontarray",
+      "description": "Adds one or more elements to the front of an array and returns the new length of the array.",
+      "short": "Array.unshift()",
+      "example": "let arr = [5, 1, 8];\narr.unshift(2, 7);\nconsole.log(arr);",
+      "output": "[2, 7, 5, 1, 8]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift"
+    },
+    {
+      "title": "this array in other array(s) and/or value(s)",
+      "name": "arrayinother",
+      "description": "Returns a new array comprised of this array joined with other array(s) and/or value(s).",
+      "short": "Array.concat()",
+      "example": "let arr = [5, 1, 8];\nlet arr2 = ['a', 'b', 'c'];\nlet arr3 = arr.concat(arr2);\nconsole.log(arr3);",
+      "output": "[5, 1, 8, 'a', 'b', 'c']",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat"
+    },
+    {
+      "title": "element/s",
+      "name": "removeelementarray",
+      "description": "Adds and/or removes elements from an array.",
+      "short": "Array.splice()",
+      "example": "let arr = [5, 1, 8];\narr.splice(2, 1);\nconsole.log(arr);",
+      "output": "[5, 1]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice"
+    },
+    {
+      "title": "the last element of the array",
+      "name": "removelast",
+      "description": "Removes the last element from an array and returns that element.",
+      "short": "Array.pop()",
+      "example": "let arr = [5, 1, 8];\narr.pop();\nconsole.log(arr);",
+      "output": "[5, 1]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop"
+    },
+    {
+      "title": "the first element of the array",
+      "name": "removefirst",
+      "description": "Removes the first element from an array and returns that element.",
+      "short": "Array.shift()",
+      "example": "let arr = [5, 1, 8];\narr.shift();\nconsole.log(arr);",
+      "output": "[1, 8]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift"
+    },
+    {
+      "title": "one or more elements in order for use, leaving the array as is",
+      "name": "removeinorder",
+      "description": "The slice() method returns a shallow copy of a portion of an array into a new array object. You can specify either just the beginning element (where end will default to the arrays length) or both the beginning and the end, comma-separated. The original array will not be modified.",
+      "short": "Array.slice()",
+      "example": "let arr = [5, 1, 8];\nlet slicedArr = arr.slice(1);\nconsole.log(arr);\nconsole.log(slicedArr);",
+      "output": "[5, 1, 8]\n[1, 8]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice"
+    },
+    {
+      "title": "out if a certain element exists",
+      "name": "findoneout",
+      "description": "Determines whether an array contains a certain element, returning true or false as appropriate.",
+      "short": "Array.includes()",
+      "example": "let arr = [5, 1, 8];\nconsole.log(arr.includes(1));",
+      "output": "true",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes"
+    },
+    {
+      "title": "the first index of a particular item",
+      "name": "findonefirst",
+      "description": "Returns the first index at which a given element can be found in the array, or -1 if it is not present.",
+      "short": "Array.indexOf()",
+      "example": "let arr = [5, 1, 8];\nconsole.log(arr.indexOf(5));",
+      "output": "0",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf"
+    },
+    {
+      "title": "the last index of the particular item",
+      "name": "firstonelast",
+      "description": "Returns the last (greatest) index of an element within the array equal to the specified value, or -1 if none is found.",
+      "short": "Array.lastIndexOf()",
+      "example": "let arr = [5, 1, 8];\nconsole.log(arr.lastIndexOf(5));",
+      "output": "0",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf"
+    },
+    {
+      "title": "the first element that satisfies a condition",
+      "name": "findonefirstcondition",
+      "description": "Returns the found value in the array, if an element in the array satisfies the provided testing function or undefined if not found. Similar to findIndex(), but it returns the item instead of the index.",
+      "short": "Array.find()",
+      "example": "let arr = [5, 1, 8];\nlet isTiny = (el) => el < 2;\nconsole.log(arr.find(isTiny));",
+      "output": "1",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find"
+    },
+    {
+      "title": "the first index of a item that satisfies a condition",
+      "name": "findonefirstindexcondition",
+      "description": "Returns the index of the first element in the array that satisfies the provided testing function. Otherwise -1 is returned. Similar to find(), but it returns the index instead of the item.",
+      "short": "Array.findIndex()",
+      "example": "let arr = [5, 1, 8];\nlet isBig = (el) => el > 6;\nconsole.log(arr.findIndex(isBig));",
+      "output": "2",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex"
+    },
+    {
+      "title": "a value by reducing the Array, start to finish ",
+      "name": "findonestarttofinish",
+      "description": "Apply a function against an accumulator and each value of the array (from left-to-right) as to reduce it to a single value.",
+      "short": "Array.reduce()",
+      "example": "let arr = [5, 1, 8];\nlet reducer = (a, b) => a + b;\n  console.log(arr.reduce(reducer));",
+      "output": "14",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce"
+    },
+    {
+      "title": "a value by reducing the Array, finish to start",
+      "name": "findonefinishtostart",
+      "description": "Apply a function against an accumulator and each value of the array (from right-to-left) as to reduce it to a single value.",
+      "short": "Array.reduceRight()",
+      "example": "let arr = [5, 1, 8];\n[arr, [0, 1]].reduceRight((a, b) => {\n  return a.concat(b)\n}, [])",
+      "output": "[0, 1, 5, 1, 8]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight"
+    },
+    {
+      "title": "values based on a condition | create",
+      "name": "findmanycondition",
+      "description": "Creates a new array with all of the elements of this array for which the provided filtering function returns true.",
+      "short": "Array.filter()",
+      "example": "let arr = [5, 1, 8];\nlet filtered = arr.filter(el => el > 4);\nconsole.log(filtered)",
+      "output": "[5, 8]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"
+    },
+    {
+      "title": "whether or not every item satisfies a condition",
+      "name": "findmanyevery",
+      "description": "Returns true if every element in this array satisfies the provided testing function.",
+      "short": "Array.every()",
+      "example": "let arr = [5, 1, 8];\nlet isSmall = (el) => el < 10;\nconsole.log(arr.every(isSmall));",
+      "output": "true",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every"
+    },
+    {
+      "title": "whether or not at least one item satisfies a condition",
+      "name": "firstmanyleast",
+      "description": "Returns true if at least one element in this array satisfies the provided testing function.",
+      "short": "Array.some()",
+      "example": "let arr = [5, 1, 8];\nlet biggerThan4 = (el) => el > 4;\nconsole.log(arr.some(biggerThan4));",
+      "output": "true",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some"
+    },
+    {
+      "title": "executing a function I will create for each element",
+      "name": "walkexecution",
+      "description": "The forEach() method executes a provided function once for each array element.",
+      "short": "Array.forEach()",
+      "example": "let arr = [5, 1, 8];\narr.forEach((element) => {\n  console.log(element)\n});",
+      "output": "5\n1\n8",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach"
+    },
+    {
+      "title": "creating a new array from each element with a function I create",
+      "name": "walkcreatingarray",
+      "description": "Creates a new array with the results of calling a provided function on every element in this array.",
+      "short": "Array.map()",
+      "example": "let arr = [5, 1, 8];\nlet map = arr.map(x => x + 1);\nconsole.log(map);",
+      "output": "[6, 2, 9]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"
+    },
+    {
+      "title": "creating a iterator object",
+      "name": "walkiterator",
+      "description": "Returns a new Array Iterator object that contains the key/value pairs for each index in the array. There are a lot of uses for iterators, as well as other methods used with it in conjunction, like values and keys",
+      "short": "Array.entries()",
+      "example": "let arr = [5, 1, 8];\nlet iterator = arr.entries();\nconsole.log(iterator.next().value);",
+      "output": "[0, 5]\n// the 0 is the index,\n// the 5 is the first number",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries"
+    },
+    {
+      "title": "join all elements of the array into a string",
+      "name": "stringjoin",
+      "description": "Joins all elements of an array into a string. You can join it together as is or with something in between, elements.join(' - ') gives you foo-bar",
+      "short": "Array.join()",
+      "example": "let arr = [5, 1, 8];\nconsole.log(arr.join());",
+      "output": "\"5,1,8\"",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join"
+    },
+    {
+      "title": "return a string representing the array",
+      "name": "stringtostring",
+      "description": "Returns a string representing the array and its elements.",
+      "short": "Array.toString()",
+      "example": "let arr = [5, 1, 8];\nconsole.log(arr.toString());",
+      "output": "\"5,1,8\"",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString"
+    },
+    {
+      "title": "return a localized string representing the array",
+      "name": "stringlocalized",
+      "description": "This one is a bit wacko. Returns a localized string representing the array and its elements. This is very useful for dates and currency and has some strange native abstractions, so best to consult the docs when using it",
+      "short": "Array.toLocaleString()",
+      "example": "let arr = [5, 1, 8];\nlet date = [new Date()];\nconst arrString = arr.toLocaleString();\nconst dateString = date.toLocaleString();\nconsole.log(arrString, dateString);",
+      "output": "\"5,1,8 12/26/2017, 6:54:49 PM\"",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toLocaleString"
+    },
+    {
+      "title": "reverse the order of the array",
+      "name": "reverseorder",
+      "description": "Reverses the order of the elements of an array in place — the first becomes the last, and the last becomes the first.",
+      "short": "Array.reverse()",
+      "example": "let arr = [5, 1, 8];\narr.reverse();\nconsole.log(arr);",
+      "output": "[8, 1, 5]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse"
+    },
+    {
+      "title": "short the items of the array",
+      "name": "ordersort",
+      "description": "Sorts the elements of an array in place and returns the array.\n\n<b>Important note</b>: If compareFunction is not supplied, elements are sorted by converting them to strings and comparing strings in Unicode code point order. For example, \"Banana\" comes before \"cherry\". In a numeric sort, 9 comes before 80, but because numbers are converted to strings, \"80\" comes before \"9\" in Unicode order. The docs have more information to clarify.",
+      "short": "Array.sort()",
+      "example": "let arr = [5, 1, 8];\narr.sort();\nconsole.log(arr);",
+      "output": "[1, 5, 8]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"
+    },
+    {
+      "title": "find the length of the array",
+      "name": "somethinglength",
+      "description": "Returns the number of elements in that array.",
+      "short": "Array.length",
+      "example": "let arr = [5, 1, 8];\nconsole.log(arr.length);",
+      "output": "3",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length"
+    },
+    {
+      "title": "fill all the elements of the array with a static value",
+      "name": "somethingfill",
+      "description": "Fills all the elements of an array from a start index to an end index with a static value.",
+      "short": "Array.fill()",
+      "example": "let arr = [5, 1, 8];\narr.fill(2);\nconsole.log(arr);",
+      "output": "[2, 2, 2]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill"
+    },
+    {
+      "title": "copy a sequence of array elements within the array",
+      "name": "somethingcopy",
+      "description": "Copies a sequence of array elements within the array. You can specify either just the ending element (where begin will default to zero) or both the beginning and the end, comma-separated.",
+      "short": "Array.copyWithin()",
+      "example": "let arr = [5, 1, 8];\narr.copyWithin(1);\nconsole.log(arr);",
+      "output": "[5, 5, 1]",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin"
+    }
+  ]
+}

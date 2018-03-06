@@ -1,0 +1,20 @@
+{
+  "name": "mini_server",
+  "version": "0.5.0-alpha",
+  "description": "Mini Server for file functionality",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.1"
+  }
+}
