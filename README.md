@@ -1,5 +1,7 @@
 # Helper
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c696496853934a7d9dc9cfec9f21797d)](https://app.codacy.com/app/godan2310/helper?utm_source=github.com&utm_medium=referral&utm_content=Gonzalo2310/helper&utm_campaign=badger)
+
 #### Status: Alpha version
 
 > Based on the idea of Sarah Drasner (@sdras). Sample Url of Sarah Drasner's creation: [JavaScript Array Explorer](https://codepen.io/sdras/full/gogVRX/). More information at history.md
