@@ -35,9 +35,9 @@ npm run dev
 
 ## How it works
 
-If instructions have been followed, the second terminal has launched the service at http://localhost:8000
+If instructions have been followed, the second terminal has launched the service at http://localhost:8000/#/
 
-The system has two projects that we will talk about. To start creating, we must go to http://localhost:8000/admin
+The system has two projects that we will talk about. To start creating, we must go to http://localhost:8000/#/admin
 
 Starts in a menu of 7 options:
 
@@ -104,7 +104,7 @@ It is where the order of presentation of the steps and finish created is establi
 
 This is the last phase in creating the project. About the product created and its dependencies read: ProyectDependencies.md
 
-After the project has been created, you can access http://localhost:8000/ and access the list of created projects and use it.
+After the project has been created, you can access http://localhost:8000/#/ and access the list of created projects and use it.
 
 To extract the created product to another project read: Extractfinalproduct.md
 
