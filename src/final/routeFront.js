@@ -13,6 +13,5 @@ const routes =
       name: 'Example',
       component: Example
     }
-
   ]
 export default routes

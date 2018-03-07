@@ -35,9 +35,9 @@ npm run dev
 
 ## Como usar el producto
 
-Si se han seguido las instrucciones, la segunda terminal lanza el servicio en http://localhost:8000
+Si se han seguido las instrucciones, la segunda terminal lanza el servicio en http://localhost:8000/#/
 
-El sistema cuenta con dos projectos de los que luego se hablara aquí. Para comenzar a crear se debe ir a la siguiente url: http://localhost:8000/admin
+El sistema cuenta con dos projectos de los que luego se hablara aquí. Para comenzar a crear se debe ir a la siguiente url: http://localhost:8000/#/admin
 
 Comienza un menu de 7 opciones:
 
@@ -102,7 +102,7 @@ Es donde se establece el orden de presentacion de los steps y finish creados. Se
 
 Este es el ultimo paso para crear el proyecto. Sobre los productos creados y sus dependencias leer: ProyectDependencies-es.md
 
-Una vez el proyecto ha sido creado, usted puede acceder http://localhost:8000/ y acceder a una lista de projectos creados para usar.
+Una vez el proyecto ha sido creado, usted puede acceder http://localhost:8000/#/ y acceder a una lista de projectos creados para usar.
 
 Para extraer el producto creado hacia otro proyecto lea: Extractfinalproduct-es.md
 
