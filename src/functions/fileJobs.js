@@ -88,8 +88,7 @@ module.exports.RenameDir = function renamedir (oldName, newName) {
 
 module.exports.DeleteDir = function deletedir (name) {
   const destiny = '../data/' + name
-  let response = -1
-  if (!fs.existsSync(destiny)) return response
+  if (!fs.existsSync(destiny)) return -1
 
   unlinkListFiles(listFiles, origin)
   fs.rmdir(destiny)
@@ -127,7 +126,8 @@ module.exports.NewProject = function newProject (projectName) {
     const path = `${destiny}/data/${short}`
     if (!fs.existsSync(path)) fs.mkdirSync(path, 0o755)
   })
-  [ '/helper.vue', 'normalize.css', 'skeleton.css' ].forEach(x => {
+  const cssFile = [ '/helper.vue', 'normalize.css', 'skeleton.css' ]
+  cssFile.forEach(x => {
     fs.copyFile('../final/basic' + x, destiny + x, throwError())
   })
 
@@ -181,9 +181,7 @@ module.exports.NewProject = function newProject (projectName) {
 
     export default routes`
 
-  fs.writeFile('../final/routeFront.js', content, function (error) {
-    if (error) {
-      return error
-    }
+  fs.writeFile('../final/routeFront.js', content, error => {
+    if (error) return error
   })
 }
