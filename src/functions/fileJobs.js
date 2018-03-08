@@ -1,17 +1,37 @@
 /* eslint-disable handle-callback-err */
 'use strict'
-
 const fs = require('fs')
-let listFiles = ['Finish', 'Language', 'Profile', 'Steps', 'Structure']
+const listFiles = [ 'Finish', 'Language', 'Profile', 'Steps', 'Structure' ]
 
-function throwError(log = null) {
-  return function(error) {
+function capitalize (input) {
+  return input[0].toUpperCase() + input.substring(1).toLowerCase()
+}
+
+function selectFileList (file, current) {
+  const allowed = listFiles.map(x => x.toLowerCase())
+  const isProject = file.toLowerCase() === 'project'
+  const isAllowed = allowed.includes(file.toLowerCase())
+
+  if (isAllowed) return `../data/${current}/Project${capitalize(file)}.json`
+  if (isProject) return '../data/ProjectList.json'
+  return ''
+}
+
+function throwError (log = null) {
+  return function (error) {
     if (error) throw error
     if (log) console.log(log)
   }
 }
 
-module.exports.SaveData = function saveData(file, data, current) {
+function unlinkListFiles (listFiles, origin) {
+  listFiles.forEach(file => {
+    const path = `${origin}/Project${file}.json`
+    fs.unlink(path, throwError(`Delete: ${path}`))
+  })
+}
+
+module.exports.SaveData = function saveData (file, data, current) {
   let selectFile = selectFileList(file, current)
   if (selectFile === '') return {}
   fs.writeFile(selectFile, JSON.stringify(data), error => {
@@ -20,14 +40,14 @@ module.exports.SaveData = function saveData(file, data, current) {
   })
 }
 
-module.exports.ReadData = function readData(file, current) {
+module.exports.ReadData = function readData (file, current) {
   const selectFile = selectFileList(file, current)
   if (selectFile === '') return {}
   const content = fs.readFileSync(selectFile)
   return JSON.parse(content)
 }
 
-module.exports.CreateDir = function createdir(project) {
+module.exports.CreateDir = function createdir (project) {
   const target = '../data/' + project
   let response = -1
   if (!fs.existsSync(target)) {
@@ -46,7 +66,7 @@ module.exports.CreateDir = function createdir(project) {
   return response
 }
 
-module.exports.RenameDir = function renamedir(oldName, newName) {
+module.exports.RenameDir = function renamedir (oldName, newName) {
   const origin = '../data/' + oldName
   const destiny = '../data/' + newName
   let response = -1
@@ -61,42 +81,22 @@ module.exports.RenameDir = function renamedir(oldName, newName) {
       throwError()
     )
   })
-  listFiles.forEach(fileElement => {
-    const path = `${origin}/Project${fileElement}.json`
-    fs.unlink(path, throwError(`Delete: ${path}`))
-  })
+  unlinkListFiles(listFiles, origin)
   fs.rmdir(origin)
   return response
 }
 
-module.exports.DeleteDir = function deletedir(name) {
+module.exports.DeleteDir = function deletedir (name) {
   const destiny = '../data/' + name
   let response = -1
   if (!fs.existsSync(destiny)) return response
 
-  listFiles.forEach(fileElement => {
-    const path = `${destiny}/Project${fileElement}.json`
-    fs.unlink(path, throwError(`Delete: ${path}`))
-  })
+  unlinkListFiles(listFiles, origin)
   fs.rmdir(destiny)
   return 0
 }
 
-function capitalize(input) {
-  return input[0].toUpperCase() + input.substring(1).toLowerCase()
-}
-
-function selectFileList(file, current) {
-  const allowed = ['profile', 'language', 'steps', 'finish', 'structure'],
-    isProject = file.toLowerCase() === 'project',
-    isAllowed = allowed.includes(file.toLowerCase())
-
-  if (isAllowed) return `../data/${current}/Project${capitalize(file)}.json`
-  if (isProject) return '../data/ProjectList.json'
-  return ''
-}
-
-module.exports.NewProject = function newProject(projectName) {
+module.exports.NewProject = function newProject (projectName) {
   let origen = '../data/' + projectName
   let destiny = '../final/' + projectName
   let language = ''
@@ -120,26 +120,19 @@ module.exports.NewProject = function newProject(projectName) {
   if (!fs.existsSync(destiny + '/data')) {
     fs.mkdirSync(destiny + '/data', 0o755)
   }
-  language.language.push({
-    name: 'English',
-    short: 'en'
+  language.language.push({ name: 'English', short: 'en' })
+
+  // ************* copiar archivos ***********
+  language.language.forEach(({ short }) => {
+    const path = `${destiny}/data/${short}`
+    if (!fs.existsSync(path)) fs.mkdirSync(path, 0o755)
+  })
+  [ '/helper.vue', 'normalize.css', 'skeleton.css' ].forEach(x => {
+    fs.copyFile('../final/basic' + x, destiny + x, throwError())
   })
 
-  language.language
-    .forEach(({ short }) => {
-      const path = `${destiny}/data/${short}`
-      if (!fs.existsSync(path)) fs.mkdirSync(path, 0o755)
-    })
-
-    [
-      // ************* copiar archivos ***********
-      ('/helper.vue', 'normalize.css', 'skeleton.css')
-    ].forEach(x => {
-      fs.copyFile('../final/basic' + x, destiny + x, throwError())
-    })
-
   language.language.forEach(({ short }) => {
-    ;['finish', 'profile', 'steps'].forEach(x => {
+    [ 'finish', 'profile', 'steps' ].forEach(x => {
       fs.copyFile(
         `${origen}/Project${capitalize(x)}.json`,
         `${destiny}/data/${short}/${x}.json`,
@@ -153,33 +146,25 @@ module.exports.NewProject = function newProject(projectName) {
     destiny + '/data/structure.json',
     throwError()
   )
-  let temporallanguage = {
+  const temporallanguage = {
     language: language.language.map(({ name, short }) => ({ name, short }))
   }
   fs.writeFile(
     destiny + '/data/language.json',
     JSON.stringify(temporallanguage),
-    function(error) {
-      if (error) {
-        return error
-      }
+    error => {
+      if (error) return error
     }
   )
-  info.projects.push({
-    name: projectName
-  })
-  fs.writeFile('../final/ProjectList.json', JSON.stringify(info), function(
-    error
-  ) {
-    if (error) {
-      return error
-    }
+  info.projects.push({ name: projectName })
+  fs.writeFile('../final/ProjectList.json', JSON.stringify(info), error => {
+    if (error) return error
   })
   let lineImports = ''
   let lineRoutes = ''
   let lineSemicolon = ''
   let limit = info.projects.length - 1
-  info.projects.forEach(function(element, index) {
+  info.projects.forEach((element, index) => {
     lineImports += `import ${element.name} from './${element.name}/helper'\n`
     lineSemicolon = (index < limit ? ',' : '') + '\n'
     lineRoutes += `
@@ -196,7 +181,7 @@ module.exports.NewProject = function newProject(projectName) {
 
     export default routes`
 
-  fs.writeFile('../final/routeFront.js', content, function(error) {
+  fs.writeFile('../final/routeFront.js', content, function (error) {
     if (error) {
       return error
     }
