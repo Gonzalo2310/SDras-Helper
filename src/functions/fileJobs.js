@@ -14,21 +14,21 @@ function throwError(log = null) {
 module.exports.SaveData = function saveData(file, data, current) {
   let selectFile = selectFileList(file, current)
   if (selectFile === '') return {}
-  fs.writeFile(selectFile, JSON.stringify(data), function(error) {
+  fs.writeFile(selectFile, JSON.stringify(data), error => {
     if (error) return error
     return 200
   })
 }
 
 module.exports.ReadData = function readData(file, current) {
-  let selectFile = selectFileList(file, current)
+  const selectFile = selectFileList(file, current)
   if (selectFile === '') return {}
   const content = fs.readFileSync(selectFile)
   return JSON.parse(content)
 }
 
 module.exports.CreateDir = function createdir(project) {
-  let target = '../data/' + project
+  const target = '../data/' + project
   let response = -1
   if (!fs.existsSync(target)) {
     fs.mkdirSync(target, 0o755)
@@ -47,8 +47,8 @@ module.exports.CreateDir = function createdir(project) {
 }
 
 module.exports.RenameDir = function renamedir(oldName, newName) {
-  let origin = '../data/' + oldName
-  let destiny = '../data/' + newName
+  const origin = '../data/' + oldName
+  const destiny = '../data/' + newName
   let response = -1
   if (!fs.existsSync(destiny)) {
     fs.mkdirSync(destiny, 0o755)
@@ -61,27 +61,22 @@ module.exports.RenameDir = function renamedir(oldName, newName) {
       throwError()
     )
   })
-  listFiles.forEach(function(fileElement) {
-    fs.unlink(
-      `${origin}/Project${fileElement}.json`,
-      throwError(`Delete: ${destiny}/Project${fileElement}.json`)
-    )
+  listFiles.forEach(fileElement => {
+    const path = `${origin}/Project${fileElement}.json`
+    fs.unlink(path, throwError(`Delete: ${path}`))
   })
   fs.rmdir(origin)
   return response
 }
 
 module.exports.DeleteDir = function deletedir(name) {
-  let destiny = '../data/' + name
+  const destiny = '../data/' + name
   let response = -1
-  if (!fs.existsSync(destiny)) {
-    return response
-  }
-  listFiles.forEach(function(fileElement) {
-    fs.unlink(
-      `${destiny}/Project${fileElement}.json`,
-      throwError(`Delete: ${destiny}/Project${fileElement}.json`)
-    )
+  if (!fs.existsSync(destiny)) return response
+
+  listFiles.forEach(fileElement => {
+    const path = `${destiny}/Project${fileElement}.json`
+    fs.unlink(path, throwError(`Delete: ${path}`))
   })
   fs.rmdir(destiny)
   return 0
@@ -111,15 +106,12 @@ module.exports.NewProject = function newProject(projectName) {
     })
   )
   // *********** verify no duplicate ********/
-  let existold = false
   let info = JSON.parse(
     fs.readFileSync('../final/ProjectList.json', (err, data) => {
       if (err) throw err
     })
   )
-  info.projects.forEach(function(element) {
-    if (element.name === projectName) existold = true
-  })
+  const existold = info.projects.any(({ name }) => name === projectName)
   if (existold) return 404
   // ********* create directories ***********/
   if (!fs.existsSync(destiny)) {
@@ -132,58 +124,38 @@ module.exports.NewProject = function newProject(projectName) {
     name: 'English',
     short: 'en'
   })
-  language.language.forEach(function(element) {
-    if (!fs.existsSync(destiny + '/data/' + element.short)) {
-      fs.mkdirSync(destiny + '/data/' + element.short, 0o755)
-    }
+
+  language.language
+    .forEach(({ short }) => {
+      const path = `${destiny}/data/${short}`
+      if (!fs.existsSync(path)) fs.mkdirSync(path, 0o755)
+    })
+
+    [
+      // ************* copiar archivos ***********
+      ('/helper.vue', 'normalize.css', 'skeleton.css')
+    ].forEach(x => {
+      fs.copyFile('../final/basic' + x, destiny + x, throwError())
+    })
+
+  language.language.forEach(({ short }) => {
+    ;['finish', 'profile', 'steps'].forEach(x => {
+      fs.copyFile(
+        `${origen}/Project${capitalize(x)}.json`,
+        `${destiny}/data/${short}/${x}.json`,
+        throwError()
+      )
+    })
   })
-  // ************* copiar archivos ***********
-  fs.copyFile(
-    '../final/basic/helper.vue',
-    destiny + '/helper.vue',
-    throwError()
-  )
-  fs.copyFile(
-    '../final/basic/normalize.css',
-    destiny + '/normalize.css',
-    throwError()
-  )
-  fs.copyFile(
-    '../final/basic/skeleton.css',
-    destiny + '/skeleton.css',
-    throwError()
-  )
-  language.language.forEach(function(element) {
-    fs.copyFile(
-      origen + '/ProjectFinish.json',
-      `${destiny}/data/${element.short}/finish.json`,
-      throwError()
-    )
-    fs.copyFile(
-      origen + '/ProjectProfile.json',
-      `${destiny}/data/${element.short}/profile.json`,
-      throwError()
-    )
-    fs.copyFile(
-      origen + '/ProjectSteps.json',
-      `${destiny}/data/${element.short}/steps.json`,
-      throwError()
-    )
-  })
+
   fs.copyFile(
     origen + '/ProjectStructure.json',
     destiny + '/data/structure.json',
     throwError()
   )
   let temporallanguage = {
-    language: []
+    language: language.language.map(({ name, short }) => ({ name, short }))
   }
-  language.language.forEach(function(element) {
-    temporallanguage.language.push({
-      name: element.name,
-      short: element.short
-    })
-  })
   fs.writeFile(
     destiny + '/data/language.json',
     JSON.stringify(temporallanguage),
