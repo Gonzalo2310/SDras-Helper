@@ -87,31 +87,18 @@ module.exports.DeleteDir = function deletedir(name) {
   return 0
 }
 
+function capitalize(input) {
+  return input[0].toUpperCase() + input.substring(1).toLowerCase()
+}
+
 function selectFileList(file, current) {
-  let result = ''
-  switch (file) {
-    case 'profile':
-      result = `../data/${current}/ProjectProfile.json`
-      break
-    case 'language':
-      result = `../data/${current}/ProjectLanguage.json`
-      break
-    case 'steps':
-      result = `../data/${current}/ProjectSteps.json`
-      break
-    case 'finish':
-      result = `../data/${current}/ProjectFinish.json`
-      break
-    case 'structure':
-      result = `../data/${current}/ProjectStructure.json`
-      break
-    case 'project':
-      result = '../data/ProjectList.json'
-      break
-    default:
-      result = ''
-  }
-  return result
+  const allowed = ['profile', 'language', 'steps', 'finish', 'structure'],
+    isProject = file.toLowerCase() === 'project',
+    isAllowed = allowed.includes(file.toLowerCase())
+
+  if (isAllowed) return `../data/${current}/Project${capitalize(file)}.json`
+  if (isProject) return '../data/ProjectList.json'
+  return ''
 }
 
 module.exports.NewProject = function newProject(projectName) {
