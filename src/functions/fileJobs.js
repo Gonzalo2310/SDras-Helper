@@ -31,6 +31,15 @@ function unlinkListFiles (listFiles, origin) {
   })
 }
 
+function parseComponentFromName (name, trailingComma = false) {
+  return `
+  {
+    path: '/${name}',
+    name: '${name}',
+    component: ${name}
+  }${trailingComma ? ',' : ''}`
+}
+
 module.exports.SaveData = function saveData (file, data, current) {
   let selectFile = selectFileList(file, current)
   if (selectFile === '') return {}
@@ -110,15 +119,11 @@ module.exports.NewProject = function newProject (projectName) {
       if (err) throw err
     })
   )
-  const existold = info.projects.any(({ name }) => name === projectName)
+  const existold = info.projects.some(({ name }) => name === projectName)
   if (existold) return 404
   // ********* create directories ***********/
-  if (!fs.existsSync(destiny)) {
-    fs.mkdirSync(destiny, 0o755)
-  }
-  if (!fs.existsSync(destiny + '/data')) {
-    fs.mkdirSync(destiny + '/data', 0o755)
-  }
+  if (!fs.existsSync(destiny)) fs.mkdirSync(destiny, 0o755)
+  if (!fs.existsSync(destiny + '/data')) fs.mkdirSync(destiny + '/data', 0o755)
   language.language.push({ name: 'English', short: 'en' })
 
   // ************* copiar archivos ***********
@@ -160,26 +165,22 @@ module.exports.NewProject = function newProject (projectName) {
   fs.writeFile('../final/ProjectList.json', JSON.stringify(info), error => {
     if (error) return error
   })
-  let lineImports = ''
-  let lineRoutes = ''
-  let lineSemicolon = ''
-  let limit = info.projects.length - 1
-  info.projects.forEach((element, index) => {
-    lineImports += `import ${element.name} from './${element.name}/helper'\n`
-    lineSemicolon = (index < limit ? ',' : '') + '\n'
-    lineRoutes += `
-        {
-            path: '/${element.name}',
-            name: '${element.name}',
-            component: ${element.name}
-        }${lineSemicolon}`
-  })
+  const limit = info.projects.length - 1
+  const { lineImports, lineRoutes } = info.projects.reduce(
+    (c, { name }, index) => {
+      c.lineImports.push(`import ${name} from './${name}/helper'`)
+      c.lineRoutes.push(parseComponentFromName(name, index < limit))
+      return c
+    }, { lineImports: [], lineRoutes: [] }
+  )
 
-  let content = `${lineImports}const routes = [
-        ${lineRoutes}
-    ]
+  const content = `${lineImports.join('\n')}
 
-    export default routes`
+  const routes = [
+    ${lineRoutes.join('\n')}
+  ]
+
+  export default routes`
 
   fs.writeFile('../final/routeFront.js', content, error => {
     if (error) return error
