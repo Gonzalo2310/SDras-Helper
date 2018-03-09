@@ -99,7 +99,7 @@ module.exports.DeleteDir = function deletedir (name) {
   const destiny = '../data/' + name
   if (!fs.existsSync(destiny)) return -1
 
-  unlinkListFiles(listFiles, origin)
+  unlinkListFiles(listFiles, destiny)
   fs.rmdir(destiny)
   return 0
 }
@@ -132,7 +132,7 @@ module.exports.NewProject = function newProject (projectName) {
     const path = `${destiny}/data/${short}`
     if (!fs.existsSync(path)) fs.mkdirSync(path, 0o755)
   })
-  const cssFile = [ '/helper.vue', 'normalize.css', 'skeleton.css' ]
+  const cssFile = [ '/helper.vue', '/normalize.css', '/skeleton.css' ]
   cssFile.forEach(x => {
     fs.copyFile('../final/basic' + x, destiny + x, throwError())
   })
