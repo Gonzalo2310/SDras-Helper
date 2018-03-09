@@ -119,6 +119,7 @@ module.exports.NewProject = function newProject (projectName) {
       if (err) throw err
     })
   )
+
   const existold = info.projects.some(({ name }) => name === projectName)
   if (existold) return 404
   // ********* create directories ***********/
@@ -184,5 +185,6 @@ module.exports.NewProject = function newProject (projectName) {
 
   fs.writeFile('../final/routeFront.js', content, error => {
     if (error) return error
+
   })
 }
