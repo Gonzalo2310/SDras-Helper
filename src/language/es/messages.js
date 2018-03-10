@@ -100,7 +100,8 @@ const dataMessages = {
     modalTitleTwo: 'Seleccione el paso o el final'
   },
   project: {
-    title: 'Ejecutar el proceso para: '
+    title: 'Ejecutar el proceso para: ',
+    error: 'No se puede crear este proyecto'
   }
 }
 
