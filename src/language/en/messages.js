@@ -100,7 +100,8 @@ const dataMessages = {
     modalTitleTwo: 'Select step or finish'
   },
   project: {
-    title: 'Executing the process for: '
+    title: 'Executing the process for: ',
+    error: 'You cannot create this project'
   }
 }
 
