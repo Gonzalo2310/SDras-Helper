@@ -2,14 +2,14 @@
     <div>
         <el-container>
             <el-header>{{ systemLanguage.title }}
-                <el-select v-model="selectLanguage" size="mini" class="select-language">
+               <!-- <el-select v-model="selectLanguage" size="mini" class="select-language">
                     <el-option
                             v-for="(item, index) in getAvailableSystemLanguage"
                             :key="index"
                             :label="item"
                             :value="item">
                     </el-option>
-                </el-select>
+                </el-select> -->
             </el-header>
             <el-row>
                 <el-col :span="24">

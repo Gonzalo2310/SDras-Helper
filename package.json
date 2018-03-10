@@ -1,9 +1,10 @@
 {
-  "name": "sdrastemplate",
+  "name": "sdrashelper",
   "version": "1.0.0-alpha",
   "description": "Project to create Sarah Drasner style helps",
   "author": "Gonzalo Nandez <godan2310@yahoo.es>",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -14,7 +15,6 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "bulma": "^0.6.2",
     "element-ui": "^2.2.1",
     "eslint-plugin-vue": "^4.3.0",
     "lodash": "^4.17.5",
