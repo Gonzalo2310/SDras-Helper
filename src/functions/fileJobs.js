@@ -18,9 +18,16 @@ function selectFileList (file, current) {
 }
 
 function throwError (log = null) {
-  return function (error) {
+  return function (error, data = null) {
     if (error) throw error
     if (log) console.log(log)
+  }
+}
+
+function returnError (returnValue = null) {
+  return function (error) {
+    if (error) return error
+    if (returnValue) return returnValue
   }
 }
 
@@ -40,13 +47,28 @@ function parseComponentFromName (name, trailingComma = false) {
   }${trailingComma ? ',' : ''}`
 }
 
+function parseImportsAndRoutes (imports, routes) {
+  return `${imports.join('\n')}
+
+  const routes = [
+    ${routes.join('\n')}
+  ]
+
+  export default routes`
+}
+
+function makeImportsAndRoutesFromProject (options) {
+  return function (acc, {name}, index) {
+    acc.lineImports.push(`import ${name} from './${name}/helper'`)
+    acc.lineRoutes.push(parseComponentFromName(name, index < options.limit))
+    return acc
+  }
+}
+
 module.exports.SaveData = function saveData (file, data, current) {
   let selectFile = selectFileList(file, current)
   if (selectFile === '') return {}
-  fs.writeFile(selectFile, JSON.stringify(data), error => {
-    if (error) return error
-    return 200
-  })
+  fs.writeFile(selectFile, JSON.stringify(data), returnError(200))
 }
 
 module.exports.ReadData = function readData (file, current) {
@@ -109,15 +131,11 @@ module.exports.NewProject = function newProject (projectName) {
   let destiny = '../final/' + projectName
   let language = ''
   language = JSON.parse(
-    fs.readFileSync(origen + '/ProjectLanguage.json', (err, data) => {
-      if (err) throw err
-    })
+    fs.readFileSync(origen + '/ProjectLanguage.json', throwError())
   )
   // *********** verify no duplicate ********/
   let info = JSON.parse(
-    fs.readFileSync('../final/ProjectList.json', (err, data) => {
-      if (err) throw err
-    })
+    fs.readFileSync('../final/ProjectList.json', throwError())
   )
 
   const existold = info.projects.some(({name}) => name === projectName)
@@ -130,14 +148,9 @@ module.exports.NewProject = function newProject (projectName) {
   // ************* copiar archivos ***********
   language.language.forEach(({short}) => {
     const path = `${destiny}/data/${short}`
-    if (!fs.existsSync(path)) fs.mkdirSync(path, 0o755)
-  })
-  const cssFile = ['/helper.vue', '/normalize.css', '/skeleton.css']
-  cssFile.forEach(x => {
-    fs.copyFile('../final/basic' + x, destiny + x, throwError())
-  })
-
-  language.language.forEach(({short}) => {
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path, 0o755)
+    }
     ['finish', 'profile', 'steps'].forEach(x => {
       fs.copyFile(
         `${origen}/Project${capitalize(x)}.json`,
@@ -147,43 +160,27 @@ module.exports.NewProject = function newProject (projectName) {
     })
   })
 
+  const cssFile = ['/helper.vue', '/normalize.css', '/skeleton.css']
+  cssFile.forEach(x => {
+    fs.copyFile('../final/basic' + x, destiny + x, throwError())
+  })
+
   fs.copyFile(
     origen + '/ProjectStructure.json',
     destiny + '/data/structure.json',
     throwError()
   )
-  const temporallanguage = {
+  const temporallanguage = JSON.stringify({
     language: language.language.map(({name, short}) => ({name, short}))
-  }
-  fs.writeFile(
-    destiny + '/data/language.json',
-    JSON.stringify(temporallanguage),
-    error => {
-      if (error) return error
-    }
-  )
+  })
+  fs.writeFile(destiny + '/data/language.json', temporallanguage, returnError())
   info.projects.push({name: projectName})
-  fs.writeFile('../final/ProjectList.json', JSON.stringify(info), error => {
-    if (error) return error
-  })
-  const limit = info.projects.length - 1
+  fs.writeFile('../final/ProjectList.json', JSON.stringify(info), returnError())
   const {lineImports, lineRoutes} = info.projects.reduce(
-    (c, {name}, index) => {
-      c.lineImports.push(`import ${name} from './${name}/helper'`)
-      c.lineRoutes.push(parseComponentFromName(name, index < limit))
-      return c
-    }, {lineImports: [], lineRoutes: []}
+    makeImportsAndRoutesFromProject({limit: info.projects.length - 1}),
+    {lineImports: [], lineRoutes: []}
   )
 
-  const content = `${lineImports.join('\n')}
-
-  const routes = [
-    ${lineRoutes.join('\n')}
-  ]
-
-  export default routes`
-
-  fs.writeFile('../final/routeFront.js', content, error => {
-    if (error) return error
-  })
+  const content = parseImportsAndRoutes(lineImports, lineRoutes)
+  fs.writeFile('../final/routeFront.js', content, returnError())
 }
