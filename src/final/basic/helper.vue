@@ -44,7 +44,7 @@
                     <div v-else style="margin-top:10px">
                         <h2>{{finishSelect.short}}</h2>
                         <p>{{finishSelect.description}}</p>
-                        <p v-if="finishSelect.url"><a :href="finishSelect.url">Link</a></p>
+                        <p v-if="finishSelect.url"><a target="_blank" :href="finishSelect.url">Link</a></p>
                     </div>
                 </div>
             </div>
