@@ -2,9 +2,9 @@
 
 ### Sistema Administración
 
-Al crear el sistema se ha intentado pensar en opciones facil de usar por lo que se ha optado por un sistema de manejo de datos a traves de archivos en logar de bases de datos.
+Al crear el sistema se ha intentado pensar en opciones facil de usar por lo que se ha optado por un sistema de manejo de datos a traves de archivos en lugar de bases de datos.
 
-No es que el sistema sea mejor manejando datos de archivos en lugar de una base de datos pero cualquier db necesita un despliegue adicional quese ha considerado excesivo para la idea de este producto.
+No es que el sistema sea mejor manejando datos de archivos en lugar de una base de datos pero cualquier db necesita un despliegue adicional que se ha considerado excesivo para la idea de este producto.
 
 Para hacer esto posible se ha creado un servidor interno para el manejo de los archivos y sus datos.
 
@@ -29,7 +29,7 @@ El resto de las carpetas utilizadas estan estructuradas de la siguiente manera:
 
 * **src/personalStyle.css** -> conjunto de reglas css basicas para la parte de administracion
 
-* **src/store** -> Todo el contenido de Vuex esta aqui. Para un mejor manejo de la informacion se han creado modulo dentro de la carpeta ./modules y dentro existe la carpeta ./fileApi que es donde reside el codigo de Vuex qe involucra los archivos. 
+* **src/store** -> Todo el contenido de Vuex esta aqui. Para un mejor manejo de la informacion se han creado modulo dentro de la carpeta ./modules y dentro existe la carpeta ./fileApi que es donde reside el codigo de Vuex que involucra los archivos. 
 
 * **src/router** ->  Contiene las rutas del programa. Es un archivo típico de rutas en vue de no ser por `import route from '../final/routeFront'`que carga un archivo que cuando se crea un proyecto se sobreescribe y crea rutas dinamicas para el front agregando los proyectos nuevos
 
@@ -38,7 +38,7 @@ El resto de las carpetas utilizadas estan estructuradas de la siguiente manera:
 * **/src/components** -> contiene los componentes para el funcionamiento del programa
   * `admin.vue` -> Sistema de menu de administración y rutas de admin
   * `createProject.vue` -> componente muy basico para el ultimo paso de creacion del proyecto final.
-  * `finish.vue` -> Administra los elementos finish del proyecto activo (los elementos del sistema se describen en README-es.md)
+  * `finish.vue` -> Administra los elementos finish del proyecto activo (los elementos del sistema se describen en **README-es.md**)
   * `language.vue` -> Administra los idiomas del proyecto.
   * `listProject.vue` -> Administra la lista de proyectos.
   * `profile.vue` -> Administra los datos de perfil del proyecto.

@@ -1,4 +1,3 @@
-
 const languageSytem = {
   state: {
     availableSystemLanguage: ['es', 'en'],

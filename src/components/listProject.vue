@@ -14,7 +14,7 @@
             </el-button>
         </div>
         <div class="mt10">
-            <el-button type="primary" size="mini" @click="openDialog">{{systemLanguage.listproject.new}}</el-button>
+            <el-button type="primary" size="medium" @click="openDialog">{{systemLanguage.listproject.new}}</el-button>
         </div>
         <el-dialog
                 :title="systemLanguage.listproject.modalTitle"

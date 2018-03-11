@@ -7,6 +7,7 @@
                                 </span>
             </blockquote>
         </div>
+        <el-tag class="mb10">{{getCurrentProject}}</el-tag>
         <div class="grid-options-language">
             <div v-for="(language, index) in listLanguage" :key="index">
                 <el-checkbox v-model="language.selected">{{language.name}}</el-checkbox>
@@ -159,7 +160,7 @@
         background-color: #faebbc;
         border-top: 1px solid #e1cc89;
         border-bottom: 1px solid #e1cc89;
-        margin-bottom: 25px;
+        // margin-bottom: 25px;
         margin-top: -10px;
         background-image: url(https://css-tricks.com/examples/Blockquotes/images/openquote1.gif);
         background-position: top left;

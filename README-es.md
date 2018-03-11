@@ -1,4 +1,4 @@
-# Helper
+# SDras Helper
 
 #### Status: Alpha version
 
@@ -11,6 +11,7 @@ La idea principal es poder crear un sistema de ayuda sencillo e intuitivo. El si
 ## Iniciar el sistema
 
 Dos terminales deben ser abiertos para poder operar el sistema:
+
 Terminal 1:
 
 ``` bash
@@ -55,17 +56,19 @@ Hagamos una comparacion grafica del producto original para entender los campos
 
 El vinculo a github aun no ha sido desarrollado
 
-#### Language
+#### Idiomas
 
-Contiene los lenguajes extras para el proyecto ademas de ingles. Solo se crean las carpetas y las relaciones de contenidos correspondientes pero no hay traduccion automática.
+Contiene los idiomas extras para el proyecto ademas de ingles. Solo se crean las carpetas y las relaciones de contenidos correspondientes pero no hay traduccion automática.
 
 En principio todos los contenidos son en ingles y deben ser traducidos manualmente.
+
+Mas informacion de idiomas en language-es.md
 
 #### Antes de continuar
 
 El sistema se divide en 3 elementos.
 **Step**: titulo y descripcion. Puede tener descendencia
-**Finish**: Contiene informacion variada y no puede contener hijos. Es la respuesta definitiva luego de varios Steps.
+**Finish**: Contiene información variada y no puede contener hijos. Es la respuesta definitiva luego de varios Steps.
 **Structure**: Establece en forma de arbol las relaciones de contenido
 
 #### Continuando con el menu Steps:
@@ -114,6 +117,18 @@ Si desea conocer mas sobre el codigo o los procesos internos del sistema lea: De
 
 El sistema ofrece un ejemplo basado en la creacion de Sarah Drasner ya terminado y disponible para la modificacion a en `Admin` o como uso de pruebas en `/`.
 
-The system brings an example based on Sarah Drasner's creation already finished and available for modification in `Admin` or its use of tests in `/`.
+`Default`  por el contrario, es la base de las creaciones. Cualquier cambio en el valor predeterminado será heredado por proyectos posteriores.
 
-`Default` on the contrary is the basis of creations. Any change to default will be inherited by subsequent projects.
+
+
+#### Colaboradores
+
+* @malows 
+* @delineas
+* @PabloJS
+
+
+
+```
+Creado por @Gonzalo2310
+```

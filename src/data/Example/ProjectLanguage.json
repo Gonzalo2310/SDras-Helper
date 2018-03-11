@@ -1,1 +1,24 @@
-{"language":[{"selected":false,"name":"Arabic","short":"ar"},{"selected":false,"name":"Bulgarian","short":"bg"},{"selected":false,"name":"French","short":"fr"},{"selected":false,"name":"Spanish","short":"es"}]}
+{
+  "language": [
+    {
+      "selected": false,
+      "name": "Arabic",
+      "short": "ar"
+    },
+    {
+      "selected": false,
+      "name": "Bulgarian",
+      "short": "bg"
+    },
+    {
+      "selected": false,
+      "name": "French",
+      "short": "fr"
+    },
+    {
+      "selected": false,
+      "name": "Spanish",
+      "short": "es"
+    }
+  ]
+}
