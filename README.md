@@ -1,4 +1,4 @@
-# Helper
+# SDras Helper
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c696496853934a7d9dc9cfec9f21797d)](https://app.codacy.com/app/godan2310/helper?utm_source=github.com&utm_medium=referral&utm_content=Gonzalo2310/helper&utm_campaign=badger)
 
@@ -13,6 +13,7 @@ The main idea is to create a simple and intuitive help system. The system gives 
 ## Build Setup
 
 Two terminals must be open to operate the system:
+
 Terminal 1:
 
 ``` bash
@@ -61,6 +62,8 @@ Link to github is not yet developed.
 It contains extra languages for the project in addition to English. Only the corresponding folders and content relationships are created but there is no automatic translation.
 
 In principle all content is in English and must be translated manually.
+
+Mas informacion de idiomas en language.md
 
 #### Before continuing
 
@@ -119,3 +122,16 @@ If you want to know more about the code or the internal process of the system re
 The system brings an example based on Sarah Drasner's creation already finished and available for modification in `Admin` or its use of tests in `/`.
 
 `Default` on the contrary is the basis of creations. Any change to default will be inherited by subsequent projects.
+
+#### Collaborators
+
+* @malows 
+* @deline
+* @PabloJS
+
+
+
+```
+Created by @Gonzalo2310
+```
+
