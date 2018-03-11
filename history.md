@@ -24,3 +24,7 @@ During January and February this system has been developed for the first time fo
 * Working with files (writing, reading, creating, deleting and copying) from node
 * Working with folders from node (create and delete)
 * Open Source is publicly available.
+
+
+
+All suggestions and contributions are welcome.

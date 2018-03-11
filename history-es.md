@@ -25,3 +25,5 @@ Durante Enero y Febrero se ha ido desarrollando este sistema siendo la primera v
 * Trabajo con carpetas desde node (crear y eliminar)
 * Open Source disponible de forma publica.
 
+
+Todas las sugerencias y colaboraciones seran bienvenidas.
