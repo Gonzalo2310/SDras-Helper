@@ -4,7 +4,8 @@
              :ref="index" :key="index">
             <el-radio border size="mini"
                       v-model="projectSelect"
-                      :label="item.name">
+                      :label="item.name"
+                      @change="handleProjectChange">
                 {{item.name}}
             </el-radio>
             <el-button type="text" size="mini" @click="openDialogRename(item.name)" v-if="item.name!='default'">{{systemLanguage.listproject.rename}}
@@ -72,16 +73,6 @@
         cacheProjectName: ''
       }
     },
-    watch: {
-      projectSelect: function (val) {
-        this.changeCurrentProject(val)
-        this.initStructure(this.getCurrentProject)
-        this.initSteps(this.getCurrentProject)
-        this.initProfile(this.getCurrentProject)
-        this.initFinishs(this.getCurrentProject)
-        this.initLanguage(this.getCurrentProject)
-      }
-    },
     methods: {
       ...mapActions([
         'initAllProjects',
@@ -131,6 +122,14 @@
         this.removeProjectToList(this.removeProjectName)
         this.removeProjectDialog = false
         this.projectSelect = 'default'
+      },
+      handleProjectChange () {
+        this.changeCurrentProject(this.projectSelect)
+        this.initStructure(this.getCurrentProject)
+        this.initSteps(this.getCurrentProject)
+        this.initProfile(this.getCurrentProject)
+        this.initFinishs(this.getCurrentProject)
+        this.initLanguage(this.getCurrentProject)
       }
     },
     computed: {
