@@ -2,14 +2,14 @@
     <div>
         <el-container>
             <el-header>{{ systemLanguage.title }}
-               <!-- <el-select v-model="selectLanguage" size="mini" class="select-language">
-                    <el-option
+                <el-select v-model="selectLanguage" @change="handleLanguageChange" size="mini" class="select-language">
+                   <el-option
                             v-for="(item, index) in getAvailableSystemLanguage"
                             :key="index"
                             :label="item"
                             :value="item">
                     </el-option>
-                </el-select> -->
+                </el-select>
             </el-header>
             <el-row>
                 <el-col :span="24">
@@ -87,11 +87,6 @@
         selectLanguage: 'en'
       }
     },
-    watch: {
-      selectLanguage: function (value) {
-        this.setCurrentSystemLanguage(value)
-      }
-    },
     computed: {
       ...mapGetters([
         'getCurrentProject',
@@ -105,7 +100,10 @@
       }
     },
     methods: {
-      ...mapActions(['initSystemLanguage', 'setCurrentSystemLanguage'])
+      ...mapActions(['initSystemLanguage', 'setCurrentSystemLanguage']),
+      handleLanguageChange () {
+        this.setCurrentSystemLanguage(this.selectLanguage)
+      }
     },
     components: {
       profile,
