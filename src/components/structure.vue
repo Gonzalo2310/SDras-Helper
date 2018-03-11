@@ -1,7 +1,9 @@
 <template>
     <div>
+        <el-tag class="mb10">{{getCurrentProject}}</el-tag>
         <h3>{{systemLanguage.structure.title}} </h3>
         <el-button size="medium" type="primary" @click="addNode">{{systemLanguage.structure.new}}</el-button>
+        <div style="min-height: 10px"></div>
         <el-tree :data="listStructure"
                  ref="central"
                  node-key="id"

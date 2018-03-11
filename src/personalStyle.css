@@ -31,3 +31,9 @@ body {
     max-width: 80px;
     float: right;
 }
+
+.el-tag {
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: #000;
+}

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span>{{getCurrentProject}}</span>
+        <el-tag class="mb10">{{getCurrentProject}}</el-tag>
         <div class="grid-options-data">
             <div>
                 <span class="input-label">{{systemLanguage.profile.name}}</span>

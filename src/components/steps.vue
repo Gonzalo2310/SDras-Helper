@@ -1,7 +1,9 @@
 <template>
     <div>
+        <el-tag class="mb10">{{getCurrentProject}}</el-tag>
         <h3>{{ systemLanguage.steps.title }}</h3>
         <el-button type="success" size="medium" @click="actionStep('create')">{{ systemLanguage.steps.new }}</el-button>
+        <div style="min-height: 10px"></div>
         <table-special
                 @select="selectStep"
                 :list="listSteps"

@@ -1,9 +1,11 @@
 <template>
     <div>
+        <el-tag class="mb10">{{getCurrentProject}}</el-tag>
+        <div style="min-height: 10px"></div>
         <div v-if="getCurrentProject !='default'">
         <el-button type="primary"
                    @click="createProject">
-            {{systemLanguage.project.title}} {{getCurrentProject}}</el-button>
+            {{systemLanguage.project.title}}&nbsp;&nbsp;&nbsp;<i>{{getCurrentProject}}</i></el-button>
         </div>
         <div v-else>
             {{systemLanguage.project.error}}
