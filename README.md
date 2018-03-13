@@ -1,6 +1,6 @@
 # SDras Helper
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c696496853934a7d9dc9cfec9f21797d)](https://app.codacy.com/app/godan2310/helper?utm_source=github.com&utm_medium=referral&utm_content=Gonzalo2310/helper&utm_campaign=badger)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1725baabb7114607bbd116f394f06e00)](https://www.codacy.com/app/godan2310/SDras-Helper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Gonzalo2310/SDras-Helper&amp;utm_campaign=Badge_Grade)
 
 #### Status: Alpha version
 

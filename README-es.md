@@ -1,4 +1,5 @@
 # SDras Helper
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1725baabb7114607bbd116f394f06e00)](https://www.codacy.com/app/godan2310/SDras-Helper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Gonzalo2310/SDras-Helper&amp;utm_campaign=Badge_Grade)
 
 #### Status: Alpha version
 
