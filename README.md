@@ -53,7 +53,7 @@ The name must be unique and have a single word.
 
 Let's compare with the original project to understand what these fields are.
 
-![profile example](images/profile.jpg)
+![profile example](images/profile.png)
 
 Link to github is not yet developed.
 
@@ -83,7 +83,7 @@ Each step has 3 fields:
 
   The other two are explained graphically:
 
-![Steps](images/steps.jpg)
+![Steps](images/steps.png)
 
 Each step can contain as many steps or finish as you need. There is no limit to recursiveness.
 
@@ -97,7 +97,7 @@ Finish has several fields.
 
   The others we will see graphically
 
-![finish](images/finish.jpg)
+![finish](images/finish.png)
 
 Finish can't have children.
 
