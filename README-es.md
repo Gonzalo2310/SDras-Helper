@@ -53,7 +53,7 @@ El nombre de cada proyecto debe ser una palabra única
 
 Hagamos una comparacion grafica del producto original para entender los campos
 
-![profile example](images/profile.jpg)
+![profile example](images/profile.png)
 
 El vinculo a github aun no ha sido desarrollado
 
@@ -80,7 +80,7 @@ Cada step tiene 3 campos:
 
   Los otros dos se explican de forma gráfica:
 
-![Steps](images/steps.jpg)
+![Steps](images/steps.png)
 
 Cada steps puede contener tantos steps o finish como necesite. No hay limite de recursividad.
 
@@ -94,7 +94,7 @@ Finish tiene varios campos.
 
   Los otros los veremos de forma gráfica
 
-![finish](images/finish.jpg)
+![finish](images/finish.png)
 
 Los finish no pueden tener descendencia.
 
