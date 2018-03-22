@@ -67,7 +67,7 @@ let routes = [
       }
     ]
   },
-  Array.isArray(route) ? ...route : route
+  ...route
 ]
 
 export default new Router({
