@@ -1,37 +1,25 @@
 import axios from 'axios'
+import { catchHandling } from './common'
 
 const structureApi = {
-  read: function (commit, current) {
+  read (commit, current) {
     axios
       .get('http://localhost:5000/file/read/structure/' + current)
-      .then(function (response) {
-        commit('updateStructure', response.data.structure)
+      .then(({ data }) => {
+        commit('updateStructure', data.structure)
       })
-      .catch(function (response) {
-        if (response.data) {
-          console.error(response.data.error)
-        } else {
-          console.log(response)
-        }
-      })
+      .catch(catchHandling)
   },
-  store: function (commit, list, current) {
-    let send = {'structure': list}
-    axios.post('http://localhost:5000/file/store/' + current,
-      {
-        file: 'structure',
-        data: send
-      })
-      .then(function (response) {
+  store (commit, list, current) {
+    const payload = {
+      file: 'structure',
+      data: {'structure': list}
+    }
+    axios.post('http://localhost:5000/file/store/' + current, payload)
+      .then(_ => {
         commit('updateStructure', list)
       })
-      .catch(function (response) {
-        if (response.data) {
-          console.error(response.data.error)
-        } else {
-          console.log(response)
-        }
-      })
+      .catch(catchHandling)
   }
 }
 

@@ -1,37 +1,24 @@
 import axios from 'axios'
+import { catchHandling } from './common'
 
 const finishApi = {
-  read: function (commit, current) {
-    axios
-      .get('http://localhost:5000/file/read/finish/' + current)
-      .then(function (response) {
-        commit('updateFinishs', response.data.finish)
+  read (commit, current) {
+    axios.get('http://localhost:5000/file/read/finish/' + current)
+      .then(({ data }) => {
+        commit('updateFinishs', data.finish)
       })
-      .catch(function (response) {
-        if (response.data) {
-          console.error(response.data.error)
-        } else {
-          console.log(response)
-        }
-      })
+      .catch(catchHandling)
   },
   store: function (commit, list, current) {
-    let send = {'finish': list}
-    axios.post('http://localhost:5000/file/store/' + current,
-      {
-        file: 'finish',
-        data: send
-      })
-      .then(function (response) {
+    const payload = {
+      file: 'finish',
+      data: {'finish': list}
+    }
+    axios.post('http://localhost:5000/file/store/' + current, payload)
+      .then(_ => {
         commit('updateFinishs', list)
       })
-      .catch(function (response) {
-        if (response.data) {
-          console.error(response.data.error)
-        } else {
-          console.log(response)
-        }
-      })
+      .catch(catchHandling)
   }
 }
 

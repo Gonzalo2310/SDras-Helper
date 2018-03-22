@@ -1,38 +1,26 @@
 import axios from 'axios'
+import { catchHandling } from './common'
 
 const stepApi = {
   read: function (commit, currentProject) {
     axios
       .get('http://localhost:5000/file/read/steps/' + currentProject)
-      .then(function (response) {
-        commit('updateSteps', response.data.steps)
+      .then(({ data }) => {
+        commit('updateSteps', data.steps)
       })
-      .catch(function (response) {
-        if (response.data) {
-          console.error(response.data.error)
-        } else {
-          console.log(response)
-        }
-      })
+      .catch(catchHandling)
   },
   store: function (commit, list, currentProject) {
-    let send = {'steps': list}
-    axios.post('http://localhost:5000/file/store/' + currentProject,
-      {
-        file: 'steps',
-        data: send
-      })
-      .then(function (response) {
+    const payload = {
+      file: 'steps',
+      data: {'steps': list}
+    }
+    axios.post('http://localhost:5000/file/store/' + currentProject, payload)
+      .then(_ => {
         // console.log(response.data)
         commit('updateSteps', list)
       })
-      .catch(function (response) {
-        if (response.data) {
-          console.error(response.data.error)
-        } else {
-          console.log(response)
-        }
-      })
+      .catch(catchHandling)
   }
 }
 

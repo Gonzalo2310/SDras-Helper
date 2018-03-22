@@ -1,78 +1,46 @@
 import axios from 'axios'
+import { catchHandling } from './common'
 
 const projectApi = {
-  read: function (commit) {
+  read (commit) {
     axios
       .get('http://localhost:5000/file/read/project/basic')
       .then(function (response) {
         commit('updateListProjects', response.data.projects)
       })
-      .catch(function (response) {
-        if (response.data) {
-          console.error(response.data.error)
-        } else {
-          console.log(response)
-        }
-      })
+      .catch(catchHandling)
   },
-  store: function (commit, list) {
-    let send = {'projects': list}
-    axios.post('http://localhost:5000/file/store/basic',
-      {
-        file: 'project',
-        data: send
-      })
-      .then(function (response) {
+  store (commit, list) {
+    const payload = {
+      file: 'project',
+      data: {'projects': list}
+    }
+    axios.post('http://localhost:5000/file/store/basic', payload)
+      .then(_ => {
         commit('updateListProjects', list)
       })
-      .catch(function (response) {
-        if (response.data) {
-          console.error(response.data.error)
-        } else {
-          console.log(response)
-        }
-      })
+      .catch(catchHandling)
   },
-  create: function (commit, project) {
+  create (commit, project) {
     axios.post('http://localhost:5000/file/create/' + project)
-      .then(function (response) {
-        console.log(response.data.response)
+      .then(({ data }) => {
+        console.log(data.response)
       })
-      .catch(function (response) {
-        if (response.data) {
-          console.error(response.data.error)
-        } else {
-          console.log(response)
-        }
-      })
+      .catch(catchHandling)
   },
-  rename: function (commit, list, oldValue, newValue) {
-    let me = this
-    axios.post('http://localhost:5000/file/rename/' + oldValue + '/' + newValue)
-      .then(function (response) {
-        me.store(commit, list)
+  rename (commit, list, oldValue, newValue) {
+    axios.post(`http://localhost:5000/file/rename/${oldValue}/${newValue}`)
+      .then(respons => {
+        this.store(commit, list)
       })
-      .catch(function (response) {
-        if (response.data) {
-          console.error(response.data.error)
-        } else {
-          console.log(response)
-        }
-      })
+      .catch(catchHandling)
   },
-  destroy: function (commit, list, name) {
-    let me = this
+  destroy (commit, list, name) {
     axios.post('http://localhost:5000/file/delete/' + name)
-      .then(function (response) {
-        me.store(commit, list)
+      .then(_ => {
+        this.store(commit, list)
       })
-      .catch(function (response) {
-        if (response.data) {
-          console.error(response.data.error)
-        } else {
-          console.log(response)
-        }
-      })
+      .catch(catchHandling)
   }
 }
 
