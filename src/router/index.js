@@ -66,11 +66,10 @@ let routes = [
         component: createProject
       }
     ]
-  }
+  },
+  ...route
 ]
-route.forEach(function (element) {
-  routes.push(element)
-})
+
 export default new Router({
   routes
 })
