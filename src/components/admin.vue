@@ -13,14 +13,14 @@
             </el-header>
             <el-row>
                 <el-col :span="24">
-                    <el-menu default-active="List"
+                    <el-menu default-active="Admin"
                              class="el-menu-demo"
                              mode="horizontal"
                              :router="true"
                              background-color="#094b6c"
                              text-color="#f0f8ff"
                              active-text-color="#ffd04b">
-                        <el-menu-item index="List">{{systemLanguage.menu.list}}</el-menu-item>
+                        <el-menu-item index="Admin">{{systemLanguage.menu.list}}</el-menu-item>
                         <el-menu-item index="Profile">{{systemLanguage.menu.profile}}</el-menu-item>
                         <el-menu-item index="Language">{{systemLanguage.menu.language}}</el-menu-item>
                         <el-menu-item index="Steps">{{systemLanguage.menu.steps}}</el-menu-item>
