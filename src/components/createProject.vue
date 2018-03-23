@@ -5,8 +5,7 @@
         <div v-if="getCurrentProject !='default'">
             <el-button type="primary"
                        @click="createProject"
-                       :loading="loadingProject"
-            >
+                       :loading="loadingProject">
                 {{systemLanguage.project.title}}&nbsp;&nbsp;&nbsp;<i>{{getCurrentProject}}</i></el-button>
         </div>
         <div v-else>
