@@ -125,11 +125,11 @@ The system brings an example based on Sarah Drasner's creation already finished 
 
 #### Collaborators 
 
-![Juan Manuel Cruz](https://avatars0.githubusercontent.com/u/4992593?s=60&v=4) [Juan Manuel Cruz (Malows)](https://github.com/Malows)
-![Daniel Primo](https://avatars1.githubusercontent.com/u/1122071?s=60&v=4) [Daniel Primo (delineas)](https://github.com/delineas) 
-![PabloJS](https://avatars1.githubusercontent.com/u/25794960?s=60&v=4) [PabloJS](https://github.com/PabloJS) 
-![Alexandre Ballesté](https://avatars0.githubusercontent.com/u/1745437?s=60&v=4) [Alexandre Ballesté (sinmsinm)](https://github.com/sinmsinm) 
-![Laura Santana](https://avatars2.githubusercontent.com/u/11777927?s=60&v=4) [Laura Santana (LalyStana)](https://github.com/LalyStana)
+* ![Juan Manuel Cruz](https://avatars0.githubusercontent.com/u/4992593?s=60&v=4) [Juan Manuel Cruz (Malows)](https://github.com/Malows)
+* ![Daniel Primo](https://avatars1.githubusercontent.com/u/1122071?s=60&v=4) [Daniel Primo (delineas)](https://github.com/delineas) 
+* ![PabloJS](https://avatars1.githubusercontent.com/u/25794960?s=60&v=4) [PabloJS](https://github.com/PabloJS) 
+* ![Alexandre Ballesté](https://avatars0.githubusercontent.com/u/1745437?s=60&v=4) [Alexandre Ballesté (sinmsinm)](https://github.com/sinmsinm) 
+* ![Laura Santana](https://avatars2.githubusercontent.com/u/11777927?s=60&v=4) [Laura Santana (LalyStana)](https://github.com/LalyStana)
 
 #### Created by 
 ![Gonzalo Nandez](https://avatars0.githubusercontent.com/u/6000947?s=60&v=4) [Gonzalo Nandez (Gonzalo2310)](https://github.com/Gonzalo2310)
