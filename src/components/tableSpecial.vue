@@ -5,8 +5,10 @@
                 @row-click="emitEvent"
                 style="width:100%">
             <el-table-column v-for="title in titles" :key="title.index"
-                             :prop="title.prop"
                              :label="title.label">
+                <template slot-scope="scope">
+                    {{limitSizeString(scope.row[title.prop], 50)}}
+                </template>
             </el-table-column>
         </el-table>
     </div>
@@ -43,6 +45,9 @@
     methods: {
       emitEvent (row, event, column) {
         this.$emit('select', row.name)
+      },
+      limitSizeString (stringValue, stringSize) {
+        return stringValue.length > stringSize ? stringValue.substring(0, stringSize) + '...' : stringValue
       }
     },
     computed: {
