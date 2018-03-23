@@ -31,8 +31,8 @@ let routes = [
     component: Admin,
     children: [
       {
-        path: '/List',
-        name: 'List',
+        path: '',
+        name: '',
         component: listProject
       },
       {
