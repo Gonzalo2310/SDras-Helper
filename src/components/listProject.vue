@@ -92,12 +92,13 @@
       confirmDialog () {
         if (this.newProjectName === '') return
         let find = 0
-        let me = this
+        // let me = this
+        let name = (this.newProjectName.trim()).replace(' ', '')
         this.getListProject.forEach(function (element) {
-          if (element.name === me.newProjectName) find = 1
+          if (element.name === name) find = 1
         })
         if (find) return
-        this.addProjectToList(this.newProjectName)
+        this.addProjectToList(name)
         this.newProjectName = ''
         this.newProjectDialog = false
       },
