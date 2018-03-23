@@ -120,7 +120,7 @@ El sistema ofrece un ejemplo basado en la creacion de Sarah Drasner ya terminado
 
 `Default`  por el contrario, es la base de las creaciones. Cualquier cambio en el valor predeterminado será heredado por proyectos posteriores.
 
-#### Collaboradores 
+#### Colaboradores 
 
 * ![Juan Manuel Cruz](https://avatars0.githubusercontent.com/u/4992593?s=60&v=4) [Juan Manuel Cruz (Malows)](https://github.com/Malows)
 * ![Daniel Primo](https://avatars1.githubusercontent.com/u/1122071?s=60&v=4) [Daniel Primo (delineas)](https://github.com/delineas) 
