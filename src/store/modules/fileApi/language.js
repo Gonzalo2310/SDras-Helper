@@ -13,7 +13,7 @@ const languageApi = {
     const payload = {
       file: 'language',
       data: {'language': list}
-    })
+    }
     axios.post('http://localhost:5000/file/store/' + current, payload)
       .then(_ => {
         commit('updateLanguage', list)
