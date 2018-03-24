@@ -31,8 +31,8 @@ let routes = [
     component: Admin,
     children: [
       {
-        path: '/List',
-        name: 'List',
+        path: '',
+        name: '',
         component: listProject
       },
       {
@@ -67,7 +67,7 @@ let routes = [
       }
     ]
   },
-  Array.isArray(route) ? ...route : route
+  ...route
 ]
 
 export default new Router({

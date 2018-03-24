@@ -39,22 +39,22 @@ function unlinkListFiles (listFiles, origin) {
 }
 
 function parseComponentFromName (name, trailingComma = false) {
-  return `
-  {
-    path: '/${name}',
-    name: '${name}',
-    component: ${name}
-  }${trailingComma ? ',' : ''}`
+  return `{
+      path: '/${name}',
+      name: '${name}',
+      component: ${name}
+    }${trailingComma ? ',' : ''}`
 }
 
 function parseImportsAndRoutes (imports, routes) {
   return `${imports.join('\n')}
 
-  const routes = [
-    ${routes.join('\n')}
+const routes =
+  [
+    ${routes.join(' ')}
   ]
 
-  export default routes`
+export default routes\n`
 }
 
 function makeImportsAndRoutesFromProject (options) {
