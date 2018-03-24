@@ -11,6 +11,15 @@
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="currentPage"
+                :page-sizes="[10, 25, 50, 100]"
+                :page-size="currentSize"
+                layout="sizes, prev, pager, next"
+                :total="currentTotal">
+        </el-pagination>
     </div>
 </template>
 
@@ -39,10 +48,17 @@
       return {
         currentPosition: 0,
         currentSize: 10,
-        currentTotal: 0
+        currentPage: 1
       }
     },
     methods: {
+      handleSizeChange (newSize) {
+        this.currentSize = newSize
+        this.currentPage = 1
+      },
+      handleCurrentChange (newPage) {
+        this.currentPage = newPage
+      },
       emitEvent (row, event, column) {
         this.$emit('select', row.name)
       },
@@ -54,11 +70,11 @@
       interData () {
         return this.list || []
       },
+      currentTotal () {
+        return this.list.length
+      },
       paginateList () {
-        let result = _.chunk(this.interData, this.interData.length)
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.currentTotal = result.length
-        return result[this.currentPosition]
+        return _.chunk(this.interData, this.currentSize)[this.currentPage - 1]
       },
       titles () {
         let answers = []
