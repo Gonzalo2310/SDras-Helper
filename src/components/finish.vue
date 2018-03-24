@@ -2,12 +2,14 @@
     <div>
         <el-tag class="mb10">{{getCurrentProject}}</el-tag>
         <h3>{{systemLanguage.finish.title }}</h3>
-        <el-button type="success" size="medium" @click="actionFinish('create')">{{systemLanguage.finish.new}}</el-button>
+        <el-button type="success" size="medium" @click="actionFinish('create')">{{systemLanguage.finish.new}}
+        </el-button>
         <div style="min-height: 10px"></div>
-        <table-special
-                @select="selectFinish"
-                :list="listFinishs"
-                :list-label="[
+        <keep-alive>
+            <table-special
+                    @select="selectFinish"
+                    :list="listFinishs"
+                    :list-label="[
                 systemLanguage.finish.table.title,
                 systemLanguage.finish.table.name,
                 systemLanguage.finish.table.description,
@@ -15,7 +17,8 @@
                 systemLanguage.finish.table.example,
                 systemLanguage.finish.table.output
                 ]"
-        ></table-special>
+            ></table-special>
+        </keep-alive>
         <el-dialog
                 title="Create the finish"
                 :visible.sync="finishModalCreate">
