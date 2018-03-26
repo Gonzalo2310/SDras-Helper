@@ -7,20 +7,24 @@
         <el-tree :data="listStructure"
                  ref="central"
                  node-key="id"
-                 default-expand-all
                  :expand-on-click-node="false"
                  :render-content="renderContent"></el-tree>
         <el-dialog
                 :title="titleDialog"
                 :visible.sync="structureDialog"
                 width="90%">
-            <span v-if="parentSelected">{{systemLanguage.structure.modalTitleStep}}</span>
-            <span v-else>{{systemLanguage.structure.modalMessageStep}}</span>
-            <table-special :list="listSteps" @select="appendStep"></table-special>
-            <div v-if="parentSelected">
-                <span>{{systemLanguage.structure.modalTitleFinish}}</span>
-                <table-special :list="listFinishs" @select="appendFinish"></table-special>
-            </div>
+            <el-collapse v-model="activeName" accordion>
+                <el-collapse-item
+                        :title="((parentSelected) ? systemLanguage.structure.modalTitleStep : systemLanguage.structure.modalMessageStep )"
+                        name="1">
+                    <table-special :list="listSteps" @select="appendStep"></table-special>
+                </el-collapse-item>
+                <div v-if="parentSelected">
+                    <el-collapse-item :title="systemLanguage.structure.modalTitleFinish" name="2">
+                        <table-special :list="listFinishs" @select="appendFinish"></table-special>
+                    </el-collapse-item>
+                </div>
+            </el-collapse>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="structureDialog = false">{{systemLanguage.structure.cancel}}</el-button>
             </span>
@@ -39,7 +43,8 @@
       return {
         structureDialog: false,
         parentSelected: null,
-        typeSelected: ''
+        typeSelected: '',
+        activeName: '0'
       }
     },
     mounted: function () {
@@ -106,8 +111,10 @@
             <span>{node.label}</span>
           </span>
           <span>
-          <el-button style="font-size: 12px;" type="text" on-click={() => this.handleNodeClick(data)}>{this.systemLanguage.structure.append}</el-button>
-          <el-button style="font-size: 12px;" type="text" on-click={() => this.remove(node, data)}>{this.systemLanguage.structure.delete}</el-button>
+          <el-button style="font-size: 12px;" type="text"
+                     on-click={() => this.handleNodeClick(data)}>{this.systemLanguage.structure.append}</el-button>
+          <el-button style="font-size: 12px;" type="text"
+                     on-click={() => this.remove(node, data)}>{this.systemLanguage.structure.delete}</el-button>
           </span>
           </span>)
         }
@@ -118,7 +125,8 @@
             <span>{node.label}</span>
           </span>
           <span>
-          <el-button style="font-size: 12px;" type="text" on-click={() => this.remove(node, data)}>{this.systemLanguage.structure.delete}</el-button>
+          <el-button style="font-size: 12px;" type="text"
+                     on-click={() => this.remove(node, data)}>{this.systemLanguage.structure.delete}</el-button>
           </span>
           </span>)
       }
