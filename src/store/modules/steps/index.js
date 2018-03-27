@@ -28,8 +28,10 @@ const steps = {
       stepApi.store(commit, list, destinyData.currentProject)
     }
   },
+  // TODO: DEPRECATED - use the state instead a getter without any data change
   getters: {
     listSteps (state) {
+      console.log('DEPRECATED - use the state instead a getter without any data change')
       return state.listSteps
     }
   }
