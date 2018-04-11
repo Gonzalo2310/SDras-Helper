@@ -53,92 +53,89 @@
 </template>
 
 <script>
-  import {mapActions, mapGetters} from 'vuex'
-  import languageSystem from '../language/en/messages'
+import {mapActions, mapGetters} from 'vuex'
+import common from './commonMixins'
 
-  export default {
-    name: 'list-project',
-    mounted: function () {
-      this.initAllProjects()
-    },
-    data () {
-      return {
-        projectSelect: 'default',
-        newProjectDialog: false,
-        newProjectName: '',
-        removeProjectDialog: false,
-        removeProjectName: '',
-        renameProjectDialog: false,
-        renameProjectName: '',
-        cacheProjectName: ''
-      }
-    },
-    methods: {
-      ...mapActions([
-        'initAllProjects',
-        'initFinishs',
-        'initLanguage',
-        'initProfile',
-        'initSteps',
-        'initStructure',
-        'addProjectToList',
-        'changeCurrentProject',
-        'removeProjectToList',
-        'renameProjectToList']),
-      openDialog () {
-        this.newProjectName = ''
-        this.newProjectDialog = true
-      },
-      confirmDialog () {
-        if (this.newProjectName === '') return
-        let find = 0
-        // let me = this
-        let name = (this.newProjectName.trim()).replace(' ', '')
-        this.getListProject.forEach(function (element) {
-          if (element.name === name) find = 1
-        })
-        if (find) return
-        this.addProjectToList(name)
-        this.newProjectName = ''
-        this.newProjectDialog = false
-      },
-      openDialogRename (name) {
-        this.cacheProjectName = name
-        this.renameProjectName = name
-        this.renameProjectDialog = true
-      },
-      confirmDialogRename () {
-        this.renameProjectToList({
-          oldValue: this.cacheProjectName,
-          newValue: this.renameProjectName
-        })
-        this.renameProjectDialog = false
-        this.projectSelect = 'default'
-      },
-      openDialogRemove (name) {
-        this.removeProjectName = name
-        this.removeProjectDialog = true
-      },
-      confirmDialogRemove () {
-        this.removeProjectToList(this.removeProjectName)
-        this.removeProjectDialog = false
-        this.projectSelect = 'default'
-      },
-      handleProjectChange () {
-        this.changeCurrentProject(this.projectSelect)
-        this.initStructure(this.getCurrentProject)
-        this.initSteps(this.getCurrentProject)
-        this.initProfile(this.getCurrentProject)
-        this.initFinishs(this.getCurrentProject)
-        this.initLanguage(this.getCurrentProject)
-      }
-    },
-    computed: {
-      ...mapGetters(['getListProject', 'getCurrentProject', 'getCurrentSystemMessage']),
-      systemLanguage () {
-        if (this.getCurrentSystemMessage.default) return this.getCurrentSystemMessage.default
-        return languageSystem
-      }
+export default {
+  name: 'list-project',
+  mixins: [common],
+  mounted: function () {
+    this.initAllProjects()
+  },
+  data () {
+    return {
+      projectSelect: 'default',
+      newProjectDialog: false,
+      newProjectName: '',
+      removeProjectDialog: false,
+      removeProjectName: '',
+      renameProjectDialog: false,
+      renameProjectName: '',
+      cacheProjectName: ''
     }
+  },
+  methods: {
+    ...mapActions([
+      'initAllProjects',
+      'initFinishs',
+      'initLanguage',
+      'initProfile',
+      'initSteps',
+      'initStructure',
+      'addProjectToList',
+      'changeCurrentProject',
+      'removeProjectToList',
+      'renameProjectToList']),
+    openDialog () {
+      this.newProjectName = ''
+      this.newProjectDialog = true
+    },
+    confirmDialog () {
+      if (this.newProjectName === '') return
+      let find = 0
+      let name = (this.newProjectName.trim()).replace(' ', '')
+      this.getListProject.forEach(function (element) {
+        if (element.name === name) find = 1
+      })
+      if (find) return
+      this.addProjectToList(name)
+      this.newProjectName = ''
+      this.newProjectDialog = false
+    },
+    openDialogRename (name) {
+      this.cacheProjectName = name
+      this.renameProjectName = name
+      this.renameProjectDialog = true
+    },
+    confirmDialogRename () {
+      this.renameProjectToList({
+        oldValue: this.cacheProjectName,
+        newValue: this.renameProjectName
+      })
+      this.renameProjectDialog = false
+      this.projectSelect = 'default'
+    },
+    openDialogRemove (name) {
+      this.removeProjectName = name
+      this.removeProjectDialog = true
+    },
+    confirmDialogRemove () {
+      this.removeProjectToList(this.removeProjectName)
+      this.removeProjectDialog = false
+      this.projectSelect = 'default'
+      this.handleProjectChange()
+    },
+    handleProjectChange () {
+      this.changeCurrentProject(this.projectSelect)
+      this.initStructure(this.getCurrentProject)
+      this.initSteps(this.getCurrentProject)
+      this.initProfile(this.getCurrentProject)
+      this.initFinishs(this.getCurrentProject)
+      this.initLanguage(this.getCurrentProject)
+    }
+  },
+  computed: {
+    ...mapGetters(['getListProject'])
   }
+}
 </script>

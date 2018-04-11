@@ -85,109 +85,109 @@
 </template>
 
 <script>
-  import tableSpecial from './tableSpecial'
-  import {mapActions, mapGetters} from 'vuex'
-  import languageSystem from '../language/en/messages'
+import tableSpecial from './tableSpecial'
+import {mapActions, mapState} from 'vuex'
+import common from './commonMixins'
 
-  export default {
-    name: 'finish',
-    mounted: function () {
-      this.initFinishs(this.getCurrentProject)
-    },
-    data () {
-      return {
-        finishBaseTitle: '',
-        finishBaseName: '',
-        finishBaseDescription: '',
-        finishBaseShort: '',
-        finishBaseExample: '',
-        finishBaseOutput: '',
-        finishBaseParent: '',
-        finishBaseUrl: '',
-        finishModalCreate: false,
-        errorModal: false,
-        errorModalRepeat: false
-      }
-    },
-    methods: {
-      ...mapActions(['initFinishs', 'addFinish', 'removeFinish']),
-      selectFinish (name) {
-        let me = this
-        this.removeFinish({
-          name: name,
-          currentProject: me.getCurrentProject
-        })
-      },
-      actionFinish (action) {
-        let me = this
-        this.errorModalRepeat = false
-        this.errorModal = false
-        switch (action) {
-          case 'create':
-            this.finishBaseTitle = ''
-            this.finishBaseName = ''
-            this.finishBaseDescription = ''
-            this.finishBaseShort = ''
-            this.finishBaseExample = ''
-            this.finishBaseOutput = ''
-            this.finishBaseParent = ''
-            this.finishBaseUrl = ''
-            this.finishModalCreate = true
-            break
-          case 'store':
-            this.errorModal = false
-            this.errorModalRepeat = false
-            if (this.finishBaseTitle === '' || this.finishBaseName === '' || this.finishBaseDescription === '' || this.finishBaseShort === '' || this.finishBaseExample === '' || this.finishBaseOutput === '') {
-              this.errorModal = true
-              return
-            }
-            let foundRepeat = this.listFinishs.find(function (element) {
-              return element.name.toUpperCase() === me.finishBaseName.toUpperCase()
-            })
-            if (foundRepeat) {
-              this.errorModalRepeat = true
-              return
-            }
-            let elementFinish = {
-              title: this.finishBaseTitle,
-              name: this.finishBaseName,
-              description: this.finishBaseDescription,
-              short: this.finishBaseShort,
-              example: this.finishBaseExample,
-              output: this.finishBaseOutput,
-              url: this.finishBaseUrl
-            }
-            this.addFinish({
-              element: elementFinish,
-              currentProject: me.getCurrentProject
-            })
-            this.finishModalCreate = false
-            break
-          case 'cancel':
-            this.finishBaseTitle = ''
-            this.finishBaseName = ''
-            this.finishBaseDescription = ''
-            this.finishBaseShort = ''
-            this.finishBaseExample = ''
-            this.finishBaseOutput = ''
-            this.finishBaseParent = ''
-            this.finishBaseUrl = ''
-            this.finishModalCreate = false
-            break
-        }
-      }
-    },
-    computed: {
-      ...mapGetters(['listFinishs', 'getCurrentProject', 'getCurrentSystemMessage']),
-      systemLanguage () {
-        if (this.getCurrentSystemMessage.default) return this.getCurrentSystemMessage.default
-        return languageSystem
-      }
-    },
-    components: {
-      tableSpecial
+export default {
+  name: 'finish',
+  mixins: [common],
+  mounted: function () {
+    this.initFinishs(this.getCurrentProject)
+  },
+  data () {
+    return {
+      finishBaseTitle: '',
+      finishBaseName: '',
+      finishBaseDescription: '',
+      finishBaseShort: '',
+      finishBaseExample: '',
+      finishBaseOutput: '',
+      finishBaseParent: '',
+      finishBaseUrl: '',
+      finishModalCreate: false,
+      errorModal: false,
+      errorModalRepeat: false
     }
+  },
+  methods: {
+    ...mapActions(['initFinishs', 'addFinish', 'removeFinish']),
+    selectFinish (name) {
+      let me = this
+      this.removeFinish({
+        name: name,
+        currentProject: me.getCurrentProject
+      })
+    },
+    actionFinish (action) {
+      let me = this
+      this.errorModalRepeat = false
+      this.errorModal = false
+      switch (action) {
+        case 'create':
+          this.finishBaseTitle = ''
+          this.finishBaseName = ''
+          this.finishBaseDescription = ''
+          this.finishBaseShort = ''
+          this.finishBaseExample = ''
+          this.finishBaseOutput = ''
+          this.finishBaseParent = ''
+          this.finishBaseUrl = ''
+          this.finishModalCreate = true
+          break
+        case 'store':
+          this.errorModal = false
+          this.errorModalRepeat = false
+          if (this.finishBaseTitle === '' || this.finishBaseName === '' || this.finishBaseDescription === '' || this.finishBaseShort === '' || this.finishBaseExample === '' || this.finishBaseOutput === '') {
+            this.errorModal = true
+            return
+          }
+          let foundRepeat = this.listFinishs.find(function (element) {
+            return element.name.toUpperCase() === me.finishBaseName.toUpperCase()
+          })
+          if (foundRepeat) {
+            this.errorModalRepeat = true
+            return
+          }
+          let elementFinish = {
+            title: this.finishBaseTitle,
+            name: this.finishBaseName,
+            description: this.finishBaseDescription,
+            short: this.finishBaseShort,
+            example: this.finishBaseExample,
+            output: this.finishBaseOutput,
+            url: this.finishBaseUrl
+          }
+          this.addFinish({
+            element: elementFinish,
+            currentProject: me.getCurrentProject
+          })
+          this.finishModalCreate = false
+          break
+        case 'cancel':
+          this.finishBaseTitle = ''
+          this.finishBaseName = ''
+          this.finishBaseDescription = ''
+          this.finishBaseShort = ''
+          this.finishBaseExample = ''
+          this.finishBaseOutput = ''
+          this.finishBaseParent = ''
+          this.finishBaseUrl = ''
+          this.finishModalCreate = false
+          break
+      }
+    }
+  },
+  computed: {
+    ...mapState(['finish']),
+    listFinishs () {
+      return this.finish.listFinishs
+    }
+  },
+  components: {
+    tableSpecial
   }
+}
 </script>
 
 <style scoped>

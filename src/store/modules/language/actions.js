@@ -8,7 +8,7 @@ const payload = language => ({file: 'language', data: {language}})
 const actionsLanguage = {
   addLanguage ({commit, state}, {element, currentProject}) {
     setTimeout(() => {
-      const list = [...state.availableLanguagem, element]
+      const list = [...state.availableLanguage, element]
       handle(commit, axios.post('http://localhost:5000/file/store/' + currentProject, payload(list)), list)
     }, 500)
   },

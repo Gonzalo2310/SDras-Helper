@@ -24,71 +24,71 @@
 </template>
 
 <script>
-  const _ = require('lodash')
+const _ = require('lodash')
 
-  export default {
-    name: 'tableSpecial',
-    props: {
-      list: {
-        default: function () {
-          return []
-        },
-        type: Array,
-        required: true
+export default {
+  name: 'tableSpecial',
+  props: {
+    list: {
+      default: function () {
+        return []
       },
-      listLabel: {
-        type: Array,
-        required: false,
-        default: function () {
-          return []
-        }
-      }
+      type: Array,
+      required: true
     },
-    data () {
-      return {
-        currentPosition: 0,
-        currentSize: 10,
-        currentPage: 1
-      }
-    },
-    methods: {
-      handleSizeChange (newSize) {
-        this.currentSize = newSize
-        this.currentPage = 1
-      },
-      handleCurrentChange (newPage) {
-        this.currentPage = newPage
-      },
-      emitEvent (row, event, column) {
-        this.$emit('select', row.name)
-      },
-      limitSizeString (stringValue, stringSize) {
-        return stringValue.length > stringSize ? stringValue.substring(0, stringSize) + '...' : stringValue
-      }
-    },
-    computed: {
-      interData () {
-        return this.list || []
-      },
-      currentTotal () {
-        return this.list.length
-      },
-      paginateList () {
-        return _.chunk(this.interData, this.currentSize)[this.currentPage - 1]
-      },
-      titles () {
-        let answers = []
-        let me = this
-        let temporary = _.keys(this.interData[0])
-        temporary.forEach(function (element, index) {
-          answers.push({
-            prop: element,
-            label: me.listLabel[index] || element,
-            index: index
-          })
-        })
-        return answers
+    listLabel: {
+      type: Array,
+      required: false,
+      default: function () {
+        return []
       }
     }
+  },
+  data () {
+    return {
+      currentPosition: 0,
+      currentSize: 10,
+      currentPage: 1
+    }
+  },
+  methods: {
+    handleSizeChange (newSize) {
+      this.currentSize = newSize
+      this.currentPage = 1
+    },
+    handleCurrentChange (newPage) {
+      this.currentPage = newPage
+    },
+    emitEvent (row, event, column) {
+      this.$emit('select', row.name)
+    },
+    limitSizeString (stringValue, stringSize) {
+      return stringValue.length > stringSize ? stringValue.substring(0, stringSize) + '...' : stringValue
+    }
+  },
+  computed: {
+    interData () {
+      return this.list || []
+    },
+    currentTotal () {
+      return this.list.length
+    },
+    paginateList () {
+      return _.chunk(this.interData, this.currentSize)[this.currentPage - 1]
+    },
+    titles () {
+      let answers = []
+      let me = this
+      let temporary = _.keys(this.interData[0])
+      temporary.forEach(function (element, index) {
+        answers.push({
+          prop: element,
+          label: me.listLabel[index] || element,
+          index: index
+        })
+      })
+      return answers
+    }
   }
+}
 </script>

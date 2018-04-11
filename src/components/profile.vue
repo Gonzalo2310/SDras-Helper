@@ -29,7 +29,9 @@
             <div></div>
             <div class="button-container">
                 <el-button type="success" size="medium" @click="saveProfile">{{systemLanguage.profile.save}}</el-button>
-                <el-button type="danger" size="medium" @click="resetProfile">{{systemLanguage.profile.reset}}
+                <el-button type="warning" size="medium" @click="resetProfile">{{systemLanguage.profile.reset}}
+                </el-button>
+                <el-button type="danger" size="medium" @click="clearProfile">{{systemLanguage.profile.clear}}
                 </el-button>
             </div>
         </div>
@@ -38,72 +40,73 @@
 </template>
 
 <script>
-  import {mapActions, mapGetters} from 'vuex'
-  import languageSystem from '../language/en/messages'
+import {mapActions, mapGetters} from 'vuex'
+import common from './commonMixins'
 
-  export default {
-    name: 'profile',
-    mounted: function () {
-      this.initProfile(this.getCurrentProject)
+export default {
+  name: 'profile',
+  mixins: [common],
+  mounted: function () {
+    this.initProfile(this.getCurrentProject)
+    let me = this
+    setTimeout(function () {
+      me.resetProfile()
+    }, 500)
+  },
+  data () {
+    return {
+      titleProject: this.titleProfile,
+      summaryProject: this.summaryProfile,
+      urlProject: this.urlProfile,
+      generalTitleProject: this.generalTitleProfile,
+      errorProfile: false
+    }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => vm.resetProfile())
+  },
+  computed: {
+    ...mapGetters([
+      'profile',
+      'titleProfile',
+      'summaryProfile',
+      'urlProfile',
+      'generalTitleProfile'
+    ])
+  },
+  methods: {
+    ...mapActions(['initProfile', 'upgradeProfile']),
+    saveProfile () {
+      if (this.titleProject.trim() === '' || this.summaryProject === '') {
+        this.errorProfile = true
+        return
+      }
+      this.errorProfile = false
       let me = this
-      setTimeout(function () {
-        me.resetProfile()
-      }, 500)
+      this.upgradeProfile({
+        element: {
+          title: me.titleProject,
+          summary: me.summaryProject,
+          url: me.urlProject,
+          generalTitle: me.generalTitleProject
+        },
+        currentProject: me.getCurrentProject
+      })
     },
-    data () {
-      return {
-        titleProject: this.titleProfile,
-        summaryProject: this.summaryProfile,
-        urlProject: this.urlProfile,
-        generalTitleProject: this.generalTitleProfile,
-        errorProfile: false
-      }
+    resetProfile () {
+      this.titleProject = this.titleProfile
+      this.summaryProject = this.summaryProfile
+      this.urlProject = this.urlProfile
+      this.generalTitleProject = this.generalTitleProfile
     },
-    beforeRouteEnter (to, from, next) {
-      next(vm => vm.resetProfile())
-    },
-    computed: {
-      ...mapGetters([
-        'profile',
-        'titleProfile',
-        'summaryProfile',
-        'getCurrentProject',
-        'getCurrentSystemMessage',
-        'urlProfile',
-        'generalTitleProfile'
-      ]),
-      systemLanguage () {
-        if (this.getCurrentSystemMessage.default) return this.getCurrentSystemMessage.default
-        return languageSystem
-      }
-    },
-    methods: {
-      ...mapActions(['initProfile', 'upgradeProfile']),
-      saveProfile () {
-        if (this.titleProject.trim() === '' || this.summaryProject === '') {
-          this.errorProfile = true
-          return
-        }
-        this.errorProfile = false
-        let me = this
-        this.upgradeProfile({
-          element: {
-            title: me.titleProject,
-            summary: me.summaryProject,
-            url: me.urlProject,
-            generalTitle: me.generalTitleProject
-          },
-          currentProject: me.getCurrentProject
-        })
-      },
-      resetProfile () {
-        this.titleProject = this.titleProfile
-        this.summaryProject = this.summaryProfile
-        this.urlProject = this.urlProfile
-        this.generalTitleProject = this.generalTitleProfile
-      }
+    clearProfile () {
+      this.titleProject = ''
+      this.summaryProject = ''
+      this.urlProject = ''
+      this.generalTitleProject = ''
     }
   }
+}
 </script>
 
 <style scoped>

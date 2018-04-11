@@ -1,32 +1,35 @@
 import actions from './actions'
 
-const searchMax = elem =>
+/* const searchMax = elem =>
   Array.isArray(elem)
     ? Math.max(...elem.map(searchMax))
     : elem.hasOwnProperty('children') && elem.children.length !== 0
       ? Math.max(...elem.children.map(searchMax), elem.id)
-      : elem.id
+      : elem.id */
+const searchMax = function (state, list) {
+  list.forEach(function (element) {
+    if (element.id > state.maxId) state.maxId = element.id
+    searchMax(state, element.children)
+  })
+}
 
 const structure = {
   state: {
-    listStructure: []
+    listStructure: [],
+    maxId: 0
   },
-
   mutations: {
     updateStructure (state, list) {
       state.listStructure = list
     }
   },
-
   getters: {
-    listStructure (state) {
-      console.log('DEPRECATED - use the state instead a getter without data transformations')
-      return state.listStructure
-    },
-
-    maxId: state => searchMax(state.listStructure)
+    // maxId: state => searchMax(state.listStructure)
+    maxId (state) {
+      searchMax(state, state.listStructure)
+      return state.maxId
+    }
   },
-
   actions
 }
 

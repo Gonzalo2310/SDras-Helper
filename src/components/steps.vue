@@ -49,91 +49,91 @@
 </template>
 
 <script>
-  import {mapActions, mapGetters} from 'vuex'
-  import tableSpecial from './tableSpecial'
-  import languageSystem from '../language/en/messages'
+import {mapActions, mapState} from 'vuex'
+import tableSpecial from './tableSpecial'
+import common from './commonMixins'
 
-  export default {
-    name: 'steps',
-    mounted: function () {
-      this.initSteps(this.getCurrentProject)
-    },
-    data () {
-      return {
-        stepBasetitle: '',
-        stepBaseName: '',
-        stepBaseDescription: '',
-        stepBaseParent: '',
-        stepModalCreate: false,
-        errorModal: false,
-        errorModalRepeat: false
-      }
-    },
-    methods: {
-      ...mapActions(['initSteps', 'addStep', 'removeStep']),
-      selectStep (name) {
-        let me = this
-        this.removeStep({
-          name: name,
-          currentProject: me.getCurrentProject
-        })
-      },
-      actionStep (action) {
-        let me = this
-        this.errorModalRepeat = false
-        this.errorModal = false
-        switch (action) {
-          case 'create':
-            this.stepBasetitle = ''
-            this.stepBaseName = ''
-            this.stepBaseDescription = ''
-            this.stepBaseParent = ''
-            this.stepModalCreate = true
-            break
-          case 'store':
-            if (this.stepBasetitle === '' || this.stepBaseName === '' || this.stepBaseDescription === '') {
-              this.errorModal = true
-              return
-            }
-            let foundRepeat = this.listSteps.find(function (element) {
-              return element.name.toUpperCase() === me.stepBaseName.toUpperCase()
-            })
-            if (foundRepeat) {
-              this.errorModalRepeat = true
-              return
-            }
-            let elementStep = {
-              title: this.stepBasetitle,
-              name: this.stepBaseName,
-              description: this.stepBaseDescription
-            }
-            this.addStep({
-              element: elementStep,
-              currentProject: me.getCurrentProject
-            })
-            this.stepModalCreate = false
-            break
-          case 'cancel':
-            this.stepBasetitle = ''
-            this.stepBaseName = ''
-            this.stepBaseDescription = ''
-            this.stepBaseParent = ''
-            this.stepModalCreate = false
-            break
-        }
-      }
-    },
-    computed: {
-      ...mapGetters(['listSteps', 'getCurrentProject', 'getCurrentSystemMessage']),
-      systemLanguage () {
-        if (this.getCurrentSystemMessage.default) return this.getCurrentSystemMessage.default
-        return languageSystem
-      }
-    },
-    components: {
-      tableSpecial
+export default {
+  name: 'steps',
+  mixins: [common],
+  mounted: function () {
+    this.initSteps(this.getCurrentProject)
+  },
+  data () {
+    return {
+      stepBasetitle: '',
+      stepBaseName: '',
+      stepBaseDescription: '',
+      stepBaseParent: '',
+      stepModalCreate: false,
+      errorModal: false,
+      errorModalRepeat: false
     }
+  },
+  methods: {
+    ...mapActions(['initSteps', 'addStep', 'removeStep']),
+    selectStep (name) {
+      let me = this
+      this.removeStep({
+        name: name,
+        currentProject: me.getCurrentProject
+      })
+    },
+    actionStep (action) {
+      let me = this
+      this.errorModalRepeat = false
+      this.errorModal = false
+      switch (action) {
+        case 'create':
+          this.stepBasetitle = ''
+          this.stepBaseName = ''
+          this.stepBaseDescription = ''
+          this.stepBaseParent = ''
+          this.stepModalCreate = true
+          break
+        case 'store':
+          if (this.stepBasetitle === '' || this.stepBaseName === '' || this.stepBaseDescription === '') {
+            this.errorModal = true
+            return
+          }
+          let foundRepeat = this.listSteps.find(function (element) {
+            return element.name.toUpperCase() === me.stepBaseName.toUpperCase()
+          })
+          if (foundRepeat) {
+            this.errorModalRepeat = true
+            return
+          }
+          let elementStep = {
+            title: this.stepBasetitle,
+            name: this.stepBaseName,
+            description: this.stepBaseDescription
+          }
+          this.addStep({
+            element: elementStep,
+            currentProject: me.getCurrentProject
+          })
+          this.stepModalCreate = false
+          break
+        case 'cancel':
+          this.stepBasetitle = ''
+          this.stepBaseName = ''
+          this.stepBaseDescription = ''
+          this.stepBaseParent = ''
+          this.stepModalCreate = false
+          break
+      }
+    }
+  },
+  computed: {
+    ...mapState(['steps']),
+    listSteps () {
+      return this.steps.listSteps
+    }
+  },
+  components: {
+    tableSpecial
   }
+}
 </script>
 
 <style scoped>
