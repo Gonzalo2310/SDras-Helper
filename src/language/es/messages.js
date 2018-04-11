@@ -29,6 +29,7 @@ const dataMessages = {
     generalTitle: 'Titulo general',
     save: 'Guardar',
     reset: 'Reiniciar',
+    clear: 'Limpiar',
     error: 'Datos incompletos'
   },
   language: {

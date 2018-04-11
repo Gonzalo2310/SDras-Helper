@@ -1,6 +1,6 @@
 function changer (property) {
   return function (state, elem) {
-    state[name] = elem
+    state[property] = elem
   }
 }
 

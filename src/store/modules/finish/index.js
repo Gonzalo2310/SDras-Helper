@@ -9,14 +9,7 @@ const finishModule = {
       state.listFinishs = list
     }
   },
-  actions,
-  // TODO: DEPRECATED - use the state instead a getter without any data change
-  getters: {
-    listFinishs (state) {
-      console.log('DEPRECATED - use the state instead a getter without any data change')
-      return state.listFinishs
-    }
-  }
+  actions
 }
 
 export default finishModule

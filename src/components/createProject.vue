@@ -2,7 +2,7 @@
     <div>
         <el-tag class="mb10">{{getCurrentProject}}</el-tag>
         <div style="min-height: 10px"></div>
-        <div v-if="getCurrentProject !='default'">
+        <div v-if="getCurrentProject !=='default'">
             <el-button type="primary"
                        @click="createProject"
                        :loading="loadingProject">
@@ -15,42 +15,39 @@
 </template>
 
 <script>
-  import {mapActions, mapGetters} from 'vuex'
-  import languageSystem from '../language/en/messages'
-  import axios from 'axios'
+import {mapActions, mapGetters} from 'vuex'
+import common from './commonMixins'
+import axios from 'axios'
 
-  export default {
-    name: 'create-project',
-    data () {
-      return {
-        loadingProject: false
-      }
-    },
-    methods: {
-      ...mapActions([]),
-      createProject () {
-        this.loadingProject = true
-        let me = this
-        axios.post('http://localhost:5000/file/project/' + this.getCurrentProject)
-          .then(function (response) {
-            me.loadingProject = true
-            me.$router.push('Admin')
-          })
-          .catch(function (response) {
-            if (response.data) {
-              console.error(response.data.error)
-            } else {
-              console.log(response)
-            }
-          })
-      }
-    },
-    computed: {
-      ...mapGetters(['getCurrentProject', 'getCurrentSystemMessage']),
-      systemLanguage () {
-        if (this.getCurrentSystemMessage.default) return this.getCurrentSystemMessage.default
-        return languageSystem
-      }
+export default {
+  name: 'create-project',
+  mixins: [common],
+  data () {
+    return {
+      loadingProject: false
     }
+  },
+  methods: {
+    ...mapActions([]),
+    createProject () {
+      this.loadingProject = true
+      let me = this
+      axios.post('http://localhost:5000/file/project/' + this.getCurrentProject)
+        .then(function (response) {
+          me.loadingProject = true
+          me.$router.push('Admin')
+        })
+        .catch(function (response) {
+          if (response.data) {
+            console.error(response.data.error)
+          } else {
+            console.log(response)
+          }
+        })
+    }
+  },
+  computed: {
+    ...mapGetters([])
   }
+}
 </script>

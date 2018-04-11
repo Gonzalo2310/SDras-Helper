@@ -26,7 +26,7 @@ const actionsProjects = {
   },
 
   removeProjectToList ({commit, state}, name) {
-    const list = state.allProjects.filter(x => x.name === name)
+    const list = state.allProjects.filter(x => x.name !== name)
     axios.post('http://localhost:5000/file/delete/' + name)
       .then(_ => {
         handle(commit, axios.post('http://localhost:5000/file/store/basic', payload(list)), list)

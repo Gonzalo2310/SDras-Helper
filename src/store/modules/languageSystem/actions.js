@@ -12,6 +12,7 @@ const actionsLanguageSystem = {
   setCurrentSystemLanguage ({commit}, lng) {
     import(`@/language/${lng}/messages`)
       .then(dataMessages => {
+        console.log(dataMessages)
         commit('changeCurrentSystemMessage', dataMessages)
       })
       .catch(error => {

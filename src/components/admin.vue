@@ -3,7 +3,7 @@
         <el-container>
             <el-header>{{ systemLanguage.title }}
                 <el-select v-model="selectLanguage" @change="handleLanguageChange" size="mini" class="select-language">
-                   <el-option
+                    <el-option
                             v-for="(item, index) in getAvailableSystemLanguage"
                             :key="index"
                             :label="item"
@@ -73,41 +73,41 @@
     }
 </style>
 <script>
-  import profile from './profile'
-  import language from './language'
-  import languageSystem from '../language/en/messages'
-  import {mapActions, mapGetters} from 'vuex'
+import profile from './profile'
+import language from './language'
+import languageSystem from '../language/en/messages'
+import {mapActions, mapGetters} from 'vuex'
 
-  export default {
-    mounted: function () {
-      this.initSystemLanguage()
-    },
-    data () {
-      return {
-        selectLanguage: 'en'
-      }
-    },
-    computed: {
-      ...mapGetters([
-        'getCurrentProject',
-        'getAvailableSystemLanguage',
-        'getCurrentSystemLanguage',
-        'getCurrentSystemMessage'
-      ]),
-      systemLanguage () {
-        if (this.getCurrentSystemMessage.default) return this.getCurrentSystemMessage.default
-        return languageSystem
-      }
-    },
-    methods: {
-      ...mapActions(['initSystemLanguage', 'setCurrentSystemLanguage']),
-      handleLanguageChange () {
-        this.setCurrentSystemLanguage(this.selectLanguage)
-      }
-    },
-    components: {
-      profile,
-      language
+export default {
+  mounted: function () {
+    this.initSystemLanguage()
+  },
+  data () {
+    return {
+      selectLanguage: 'en'
     }
+  },
+  computed: {
+    ...mapGetters([
+      'getCurrentProject',
+      'getAvailableSystemLanguage',
+      'getCurrentSystemLanguage',
+      'getCurrentSystemMessage'
+    ]),
+    systemLanguage () {
+      if (this.getCurrentSystemMessage.default) return this.getCurrentSystemMessage.default
+      return languageSystem
+    }
+  },
+  methods: {
+    ...mapActions(['initSystemLanguage', 'setCurrentSystemLanguage']),
+    handleLanguageChange () {
+      this.setCurrentSystemLanguage(this.selectLanguage)
+    }
+  },
+  components: {
+    profile,
+    language
   }
+}
 </script>

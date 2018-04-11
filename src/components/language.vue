@@ -52,93 +52,93 @@
 </template>
 
 <script>
-  import {mapActions, mapGetters} from 'vuex'
-  import languageSystem from '../language/en/messages'
+import {mapActions, mapState} from 'vuex'
+import common from './commonMixins'
 
-  export default {
-    name: 'language',
-    mounted: function () {
-      this.initLanguage(this.getCurrentProject)
+export default {
+  name: 'language',
+  mixins: [common],
+  mounted: function () {
+    this.initLanguage(this.getCurrentProject)
+  },
+  data () {
+    return {
+      newLanguageVisible: false,
+      basicLanguageTitle: '',
+      basicLanguageShort: '',
+      errorModal: false
+    }
+  },
+  methods: {
+    ...mapActions(['addLanguage', 'removeLanguage', 'initLanguage', 'changeStateLanguage']),
+    basicLanguageShortLimit () {
+      this.basicLanguageShort = this.basicLanguageShort.substr(0, 2)
     },
-    data () {
-      return {
-        newLanguageVisible: false,
-        basicLanguageTitle: '',
-        basicLanguageShort: '',
-        errorModal: false
+    actionModal (action) {
+      let me = this
+      switch (action) {
+        case 'confirm':
+          if (this.basicLanguageTitle.trim() === '' || this.basicLanguageShort.trim() === '') {
+            this.errorModal = true
+            return
+          }
+          let element = {
+            selected: false,
+            name: this.basicLanguageTitle,
+            short: this.basicLanguageShort
+          }
+          this.addLanguage({
+            element: element,
+            currentProject: me.getCurrentProject
+          })
+          this.newLanguageVisible = false
+          break
+        case 'open':
+          this.basicLanguageTitle = ''
+          this.basicLanguageShort = ''
+          this.newLanguageVisible = true
+          break
+        case 'cancel':
+          this.basicLanguageTitle = ''
+          this.basicLanguageShort = ''
+          this.newLanguageVisible = false
+          break
       }
     },
-    methods: {
-      ...mapActions(['addLanguage', 'removeLanguage', 'initLanguage', 'changeStateLanguage']),
-      basicLanguageShortLimit () {
-        this.basicLanguageShort = this.basicLanguageShort.substr(0, 2)
-      },
-      actionModal (action) {
-        let me = this
-        switch (action) {
-          case 'confirm':
-            if (this.basicLanguageTitle.trim() === '' || this.basicLanguageShort.trim() === '') {
-              this.errorModal = true
-              return
-            }
-            let element = {
-              selected: false,
-              name: this.basicLanguageTitle,
-              short: this.basicLanguageShort
-            }
-            this.addLanguage({
-              element: element,
-              currentProject: me.getCurrentProject
-            })
-            this.newLanguageVisible = false
-            break
-          case 'open':
-            this.basicLanguageTitle = ''
-            this.basicLanguageShort = ''
-            this.newLanguageVisible = true
-            break
-          case 'cancel':
-            this.basicLanguageTitle = ''
-            this.basicLanguageShort = ''
-            this.newLanguageVisible = false
-            break
-        }
-      },
-      destroyLanguage () {
-        this.removeLanguage(this.getCurrentProject)
-      },
-      selectAll () {
-        let me = this
-        let state = !(me.allClick)
-        this.changeStateLanguage(state)
-      }
+    destroyLanguage () {
+      this.removeLanguage(this.getCurrentProject)
     },
-    computed: {
-      ...mapGetters(['listLanguage', 'getCurrentProject', 'getCurrentSystemMessage']),
-      systemLanguage () {
-        if (this.getCurrentSystemMessage.default) return this.getCurrentSystemMessage.default
-        return languageSystem
-      },
-      titleSelect () {
-        if (this.allClick) return this.systemLanguage.language.unselect
-        return this.systemLanguage.language.select
-      },
-      allClick () {
-        let result = true
-        this.listLanguage.forEach(function (element) {
-          if (!element.selected) result = false
-        })
-        return result
-      },
-      noneClick () {
-        let result = true
-        this.listLanguage.forEach(function (element) {
-          if (element.selected) result = false
-        })
-        return result
-      }
+    selectAll () {
+      let me = this
+      let state = !(me.allClick)
+      this.changeStateLanguage(state)
+    }
+  },
+  computed: {
+    ...mapState(['language']),
+    listLanguage () {
+      return this.language.availableLanguage
+    },
+    titleSelect () {
+      if (this.allClick) return this.systemLanguage.language.unselect
+      return this.systemLanguage.language.select
+    },
+    allClick () {
+      let result = true
+      this.listLanguage.forEach(function (element) {
+        if (!element.selected) result = false
+      })
+      return result
+    },
+    noneClick () {
+      let result = true
+      this.listLanguage.forEach(function (element) {
+        if (element.selected) result = false
+      })
+      return result
     }
   }
+}
 </script>
 
 <style scoped>
@@ -160,7 +160,7 @@
         background-color: #faebbc;
         border-top: 1px solid #e1cc89;
         border-bottom: 1px solid #e1cc89;
-        // margin-bottom: 25px;
+    / / margin-bottom: 25 px;
         margin-top: -10px;
         background-image: url(https://css-tricks.com/examples/Blockquotes/images/openquote1.gif);
         background-position: top left;
