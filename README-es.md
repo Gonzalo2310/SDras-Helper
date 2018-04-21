@@ -5,6 +5,10 @@
 
 > Basado en la idea de Sarah Drasner (@sdras). Un ejemplo de la creación de Sarah Drasner a la que se hace referencia:  [JavaScript Array Explorer](https://codepen.io/sdras/full/gogVRX/). Mas información en history-es.md
 
+## Version de nodejs
+
+> Para que la api de servicios de archivos funcione se debe usar como mínimo node 8.11.1 ya que se utiliza la función fs.copyFile y fue introducida en la versión 8.5.
+
 ## Idea
 
 La idea principal es poder crear un sistema de ayuda sencillo e intuitivo. El sistema da las herramientas para seguir el formato creado por Sarah Drasner en sus ejemplos.
