@@ -6,6 +6,10 @@
 
 > Based on the idea of Sarah Drasner (@sdras). Sample Url of Sarah Drasner's creation: [JavaScript Array Explorer](https://codepen.io/sdras/full/gogVRX/). More information at history.md
 
+## Version of nodejs
+
+> For the file services api to work you must use at least node 8.11.1 as it uses the fs.copyFile function and was introduced in version 8.5.
+
 ## Idea
 
 The main idea is to create a simple and intuitive help system. The system gives the tools to follow the format created by Sarah Drasner in her examples.
