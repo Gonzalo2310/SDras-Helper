@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex'
+import {mapActions} from 'vuex'
 import common from './commonMixins'
 import axios from 'axios'
 
@@ -45,9 +45,6 @@ export default {
           }
         })
     }
-  },
-  computed: {
-    ...mapGetters([])
   }
 }
 </script>

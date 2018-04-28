@@ -27,6 +27,10 @@ body {
     margin-top: 10px;
 }
 
+.mb10 {
+    margin-bottom: 10px;
+}
+
 .select-language {
     max-width: 80px;
     float: right;
