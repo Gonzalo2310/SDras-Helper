@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import tableSpecial from './tableSpecial'
 import common from './commonMixins'
 
@@ -135,9 +135,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-    .mt10 {
-        margin-top: 10px;
-    }
-</style>

@@ -7,25 +7,8 @@ const languageSytem = {
     currentSystemLanguage: 'en',
     currentSystemMessage: []
   },
-
   mutations,
-
-  actions,
-
-  getters: {
-    getAvailableSystemLanguage (state) {
-      console.log('DEPRECATED - use the state instead a getter without any data change')
-      return state.availableSystemLanguage
-    },
-    getCurrentSystemLanguage (state) {
-      console.log('DEPRECATED - use the state instead a getter without any data change')
-      return state.currentSystemLanguage
-    },
-    getCurrentSystemMessage (state) {
-      console.log('DEPRECATED - use the state instead a getter without any data change')
-      return state.currentSystemMessage
-    }
-  }
+  actions
 }
 
 export default languageSytem

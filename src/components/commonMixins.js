@@ -1,5 +1,5 @@
 import languageSystem from '../language/en/messages'
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 
 const common = {
   computed: {
@@ -8,8 +8,7 @@ const common = {
       return this.project.currentProject
     },
     systemLanguage () {
-      if (this.languageSystem.currentSystemMessage.default) return this.languageSystem.currentSystemMessage.default
-      return languageSystem
+      return (this.languageSystem.currentSystemMessage.default) ? this.languageSystem.currentSystemMessage.default : languageSystem
     }
   }
 }

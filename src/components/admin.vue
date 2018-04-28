@@ -75,10 +75,12 @@
 <script>
 import profile from './profile'
 import language from './language'
-import languageSystem from '../language/en/messages'
-import {mapActions, mapGetters} from 'vuex'
+import common from './commonMixins'
+import {mapActions} from 'vuex'
 
 export default {
+  name: 'admin',
+  mixins: [common],
   mounted: function () {
     this.initSystemLanguage()
   },
@@ -88,15 +90,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'getCurrentProject',
-      'getAvailableSystemLanguage',
-      'getCurrentSystemLanguage',
-      'getCurrentSystemMessage'
-    ]),
-    systemLanguage () {
-      if (this.getCurrentSystemMessage.default) return this.getCurrentSystemMessage.default
-      return languageSystem
+    getAvailableSystemLanguage () {
+      return this.languageSystem.availableSystemLanguage
+    },
+    getCurrentSystemLanguage () {
+      return this.languageSystem.state.currentSystemLanguage
+    },
+    getCurrentSystemMessage () {
+      return this.languageSystem.state.currentSystemMessage
     }
   },
   methods: {

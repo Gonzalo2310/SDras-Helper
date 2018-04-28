@@ -189,9 +189,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-    .mt10 {
-        margin-top: 10px;
-    }
-</style>
